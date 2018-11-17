@@ -1,0 +1,10 @@
+#Ant properties
+#Thu Jul 19 07:59:59 GMT 2018
+builddate=20180719 0759
+description=flexiblesearchbuilder
+group.id=de.hybris.platform
+module.name=platform-module
+name=flexiblesearchbuilder
+vendor=hybris
+version=18.08
+version.api=18.08.0
