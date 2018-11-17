@@ -1,0 +1,21 @@
+# IDEs and editors
+.project
+.classpath
+.springBeans
+.settings/
+/eclipsebin
+.externalToolBuilders/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Libraries and generated sources
+lib/
+gensrc/
+classes/
+build.xml
+
+# Others
+platformhome.properties
+extensioninfo.xsd
