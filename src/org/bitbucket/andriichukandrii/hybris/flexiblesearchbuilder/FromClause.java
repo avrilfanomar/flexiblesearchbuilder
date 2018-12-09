@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 /**
  * 'FROM' clause of the flexible search query.
  */
-public class FromClause extends TerminateQueryChainElement
+public class FromClause extends AbstractFromClauseElement
 {
 	private static final Logger LOG = Logger.getLogger(FromClause.class);
 
@@ -27,16 +27,18 @@ public class FromClause extends TerminateQueryChainElement
 		this.clazz = clazz;
 	}
 
-	public WhereClause where(final AbstractCondition condition)
+	public AliasElement as(final Alias alias)
 	{
-		return new WhereClause(this, condition);
+		this.endingClauseElement = false;
+		return new AliasElement(this, alias);
 	}
 
 	@Override
 	protected void apply(final StringBuilder sb)
 	{
 		super.apply(sb);
-		sb.append(SPACE).append(FROM).append(SPACE).append(OPENING_BRACKET).append(getTypecode()).append(CLOSING_BRACKET);
+		sb.append(SPACE).append(FROM).append(SPACE).append(OPENING_BRACKET).append(getTypecode());
+		closeBracketsIfNeeded(sb);
 	}
 
 	@Override

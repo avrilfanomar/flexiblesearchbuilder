@@ -9,5 +9,6 @@ public interface FlexibleSearchQueryChainElement
 	char QUESTION_MARK = '?';
 	char OPENING_BRACKET = '{';
 	char CLOSING_BRACKET = '}';
+	char ALIAS_AND_FIELD_SEPARATOR = '.';
 
 }

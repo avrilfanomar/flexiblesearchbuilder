@@ -15,7 +15,7 @@ public class WhereClause extends TerminateQueryChainElement
 
 	private AbstractCondition lastCondition;
 
-	WhereClause(final FromClause fromClause, final AbstractCondition condition)
+	WhereClause(final AbstractFromClauseElement fromClause, final AbstractCondition condition)
 	{
 		super(fromClause);
 		this.lastCondition = condition;

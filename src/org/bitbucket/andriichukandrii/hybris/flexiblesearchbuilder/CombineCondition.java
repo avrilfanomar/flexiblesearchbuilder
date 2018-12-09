@@ -15,14 +15,26 @@ public class CombineCondition extends AbstractCondition
 	}
 
 
-	public AbstractFieldCondition field(final String fieldName, final ParameterConditionType conditionType, final Object conditionParameter)
+	public AbstractFieldCondition field(final String fieldName, final ParameterConditionType conditionType,
+			final Object conditionParameter)
 	{
 		return new ParameterFieldCondition(this, fieldName, conditionType, conditionParameter);
+	}
+
+	public AbstractFieldCondition field(final AliasedField aliasedField, final ParameterConditionType conditionType,
+			final Object conditionParameter)
+	{
+		return new ParameterFieldCondition(this, aliasedField.getValue(), conditionType, conditionParameter);
 	}
 
 	public AbstractFieldCondition field(final String fieldName, final ParameterlessConditionType conditionType)
 	{
 		return new ParameterlessFieldCondition(this, fieldName, conditionType);
+	}
+
+	public AbstractFieldCondition field(final AliasedField aliasedField, final ParameterlessConditionType conditionType)
+	{
+		return new ParameterlessFieldCondition(this, aliasedField.getValue(), conditionType);
 	}
 
 
