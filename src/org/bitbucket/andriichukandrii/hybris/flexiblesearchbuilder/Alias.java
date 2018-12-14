@@ -1,5 +1,8 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import de.hybris.platform.core.model.ItemModel;
+
+
 /**
  * Represents flexible search query alias (usually used for tables).
  */
@@ -27,5 +30,15 @@ public class Alias
 	protected String getAliasValue()
 	{
 		return aliasValue;
+	}
+
+	/**
+	 * Creates PK field reference with this alias.
+	 * 
+	 * @return PK field reference using this alias
+	 */
+	public AliasedField pk()
+	{
+		return new AliasedField(this, ItemModel.PK);
 	}
 }

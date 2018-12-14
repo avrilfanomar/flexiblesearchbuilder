@@ -13,7 +13,7 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 	private final Object conditionParameter;
 	private String parameterCode;
 
-	public ParameterFieldCondition(final String fieldName, final ParameterConditionType conditionType,
+	ParameterFieldCondition(final String fieldName, final ParameterConditionType conditionType,
 			final Object conditionParameter)
 	{
 		super(fieldName);
@@ -21,7 +21,7 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 		this.conditionParameter = conditionParameter;
 	}
 
-	public ParameterFieldCondition(final AbstractCondition parent, final String fieldName,
+	ParameterFieldCondition(final AbstractCondition parent, final String fieldName,
 			final ParameterConditionType conditionType, final Object conditionParameter)
 	{
 		super(parent, fieldName);

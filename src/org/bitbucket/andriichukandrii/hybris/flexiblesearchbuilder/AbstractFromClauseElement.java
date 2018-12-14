@@ -1,5 +1,8 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import java.util.Collections;
+import java.util.Map;
+
 public abstract class AbstractFromClauseElement extends TerminateQueryChainElement
 {
 	protected boolean endingClauseElement = true;
@@ -20,5 +23,11 @@ public abstract class AbstractFromClauseElement extends TerminateQueryChainEleme
 		{
 			sb.append(CLOSING_BRACKET);
 		}
+	}
+
+	@Override
+	protected Map<String, Object> buildParameters()
+	{
+		return Collections.emptyMap();
 	}
 }

@@ -4,29 +4,31 @@ import static org.apache.commons.lang3.StringUtils.SPACE;
 
 import de.hybris.platform.core.model.ItemModel;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-
 
 /**
  * 'FROM' clause of the flexible search query.
  */
-public class FromClause extends AbstractFromClauseElement
+public class FromClause extends TableFromClauseElement
 {
-	private static final Logger LOG = Logger.getLogger(FromClause.class);
-
 	public static final String FROM = "FROM";
 
-	private final Class<? extends ItemModel> clazz;
-
-	<T extends ItemModel> FromClause(final Class<T> clazz)
+	FromClause(final Class<? extends ItemModel> clazz)
 	{
-		super(new DefaultSelectClause());
-		this.clazz = clazz;
+		super(clazz);
 	}
 
+	FromClause(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
+	{
+		super(parent, clazz);
+	}
+
+	/**
+	 * Marks the table with given alias.
+	 * 
+	 * @param alias
+	 *           alias
+	 * @return alias query element
+	 */
 	public AliasElement as(final Alias alias)
 	{
 		this.endingClauseElement = false;
@@ -39,25 +41,6 @@ public class FromClause extends AbstractFromClauseElement
 		super.apply(sb);
 		sb.append(SPACE).append(FROM).append(SPACE).append(OPENING_BRACKET).append(getTypecode());
 		closeBracketsIfNeeded(sb);
-	}
-
-	@Override
-	protected Map<String, Object> buildParameters()
-	{
-		return Collections.emptyMap();
-	}
-
-	private String getTypecode()
-	{
-		try
-		{
-			return clazz.getField("_TYPECODE").get(null).toString();
-		}
-		catch (final IllegalAccessException | NoSuchFieldException e)
-		{
-			LOG.error("Failed to get _TYPECODE field from class " + clazz.getName() + " during building of flexible search query.");
-			throw new IllegalStateException(e);
-		}
 	}
 
 }
