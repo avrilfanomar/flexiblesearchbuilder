@@ -31,9 +31,9 @@ public class JoinAliasElement extends AbstractFlexibleSearchQueryChainElement
 	}
 
 	@Override
-	protected void apply(final StringBuilder sb)
+	protected void appendQuery(final StringBuilder sb)
 	{
-		super.apply(sb);
+		super.appendQuery(sb);
 		sb.append(SPACE).append(AS).append(SPACE).append(alias.getAliasValue());
 	}
 }

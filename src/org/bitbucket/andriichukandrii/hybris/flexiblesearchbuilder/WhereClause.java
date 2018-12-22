@@ -15,18 +15,19 @@ public class WhereClause extends TerminateQueryChainElement
 
 	private AbstractCondition lastCondition;
 
-	WhereClause(final AbstractFromClauseElement fromClause, final AbstractCondition condition)
+	WhereClause(final FromClause fromClause, final AbstractCondition condition)
 	{
 		super(fromClause);
 		this.lastCondition = condition;
 	}
 
 	@Override
-	protected void apply(final StringBuilder sb)
+	protected void appendQuery(final StringBuilder sb)
 	{
-		super.apply(sb);
+		super.appendQuery(sb);
+
 		sb.append(SPACE).append(WHERE);
-		lastCondition.apply(sb);
+		lastCondition.appendQuery(sb);
 	}
 
 	@Override

@@ -7,13 +7,13 @@ public class ParameterlessFieldCondition extends AbstractFieldCondition
 {
 	private final ParameterlessConditionType conditionType;
 
-	protected ParameterlessFieldCondition(final String fieldName, final ParameterlessConditionType conditionType)
+	ParameterlessFieldCondition(final String fieldName, final ParameterlessConditionType conditionType)
 	{
 		super(fieldName);
 		this.conditionType = conditionType;
 	}
 
-	protected ParameterlessFieldCondition(final AbstractCondition parent, final String fieldName,
+	ParameterlessFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName,
 			final ParameterlessConditionType conditionType)
 	{
 		super(parent, fieldName);
@@ -21,9 +21,9 @@ public class ParameterlessFieldCondition extends AbstractFieldCondition
 	}
 
 	@Override
-	protected void apply(final StringBuilder sb)
+	protected void appendQuery(final StringBuilder sb)
 	{
-		super.apply(sb);
+		super.appendQuery(sb);
 
 		sb.append(SPACE).append(conditionType.getValue());
 	}

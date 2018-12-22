@@ -16,7 +16,7 @@ public class FieldToFieldCondition extends AbstractFieldCondition
 		this.secondFieldName = secondFieldName;
 	}
 
-	FieldToFieldCondition(final AbstractCondition parent, final String fieldName,
+	FieldToFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName,
 			final ParameterConditionType conditionType, final String secondFieldName)
 	{
 		super(parent, fieldName);
@@ -25,9 +25,9 @@ public class FieldToFieldCondition extends AbstractFieldCondition
 	}
 
 	@Override
-	protected void apply(final StringBuilder sb)
+	protected void appendQuery(final StringBuilder sb)
 	{
-		super.apply(sb);
+		super.appendQuery(sb);
 
 		sb.append(conditionType.getValue()).append(OPENING_BRACKET).append(secondFieldName).append(CLOSING_BRACKET);
 	}

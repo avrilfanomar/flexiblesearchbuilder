@@ -21,7 +21,7 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 		this.conditionParameter = conditionParameter;
 	}
 
-	ParameterFieldCondition(final AbstractCondition parent, final String fieldName,
+	ParameterFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName,
 			final ParameterConditionType conditionType, final Object conditionParameter)
 	{
 		super(parent, fieldName);
@@ -30,9 +30,9 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 	}
 
 	@Override
-	protected void apply(final StringBuilder sb)
+	protected void appendQuery(final StringBuilder sb)
 	{
-		super.apply(sb);
+		super.appendQuery(sb);
 
 		sb.append(conditionType.getValue()).append(QUESTION_MARK).append(parameterCode);
 	}

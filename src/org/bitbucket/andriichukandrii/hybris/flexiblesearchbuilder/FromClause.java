@@ -2,45 +2,50 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import static org.apache.commons.lang3.StringUtils.SPACE;
 
-import de.hybris.platform.core.model.ItemModel;
+import java.util.Collections;
+import java.util.Map;
 
 
 /**
  * 'FROM' clause of the flexible search query.
  */
-public class FromClause extends TableFromClauseElement
+public class FromClause extends TerminateQueryChainElement
 {
 	public static final String FROM = "FROM";
 
-	FromClause(final Class<? extends ItemModel> clazz)
-	{
-		super(clazz);
-	}
+	private final AbstractFromClauseElement lastElement;
 
-	FromClause(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
+	FromClause(final AbstractFlexibleSearchQueryChainElement parent, final AbstractFromClauseElement lastElement)
 	{
-		super(parent, clazz);
+		super(parent);
+		this.lastElement = lastElement;
 	}
 
 	/**
-	 * Marks the table with given alias.
+	 * Creates 'WHERE' clause of the query.
 	 * 
-	 * @param alias
-	 *           alias
-	 * @return alias query element
+	 * @param condition
+	 *           condition (last condition in condition chain)
+	 * @return 'WHERE' clause
 	 */
-	public AliasElement as(final Alias alias)
+	public WhereClause where(final AbstractCondition condition)
 	{
-		this.endingClauseElement = false;
-		return new AliasElement(this, alias);
+		return new WhereClause(this, condition);
 	}
 
 	@Override
-	protected void apply(final StringBuilder sb)
+	protected void appendQuery(final StringBuilder sb)
 	{
-		super.apply(sb);
-		sb.append(SPACE).append(FROM).append(SPACE).append(OPENING_BRACKET).append(getTypecode());
-		closeBracketsIfNeeded(sb);
+		super.appendQuery(sb);
+
+		sb.append(SPACE).append(FROM).append(SPACE).append(OPENING_BRACKET);
+		lastElement.appendQuery(sb);
+		sb.append(CLOSING_BRACKET);
 	}
 
+	@Override
+	protected Map<String, Object> buildParameters()
+	{
+		return Collections.emptyMap();
+	}
 }

@@ -15,6 +15,12 @@ public abstract class TerminateQueryChainElement extends AbstractFlexibleSearchQ
 		super(parent);
 	}
 
+	/**
+	 * Builds the flexible search query with all chained elements inside current element. Puts all parameters (if any)
+	 * into query as well.
+	 * 
+	 * @return flexible search query
+	 */
 	public FlexibleSearchQuery build()
 	{
 		final Map<String, Object> parameters = buildParameters();
@@ -27,7 +33,7 @@ public abstract class TerminateQueryChainElement extends AbstractFlexibleSearchQ
 	private StringBuilder buildQuery()
 	{
 		final StringBuilder sb = new StringBuilder();
-		apply(sb);//applies all clauses internally
+		appendQuery(sb);//applies all clauses internally
 		return sb;
 	}
 }

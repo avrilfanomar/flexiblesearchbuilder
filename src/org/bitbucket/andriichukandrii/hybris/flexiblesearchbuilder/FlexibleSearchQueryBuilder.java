@@ -1,5 +1,7 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
+
 import de.hybris.platform.core.model.ItemModel;
 
 
@@ -15,11 +17,11 @@ public class FlexibleSearchQueryBuilder
 	 */
 	public static FromClause selectFrom(final Class<? extends ItemModel> clazz)
 	{
-		return new FromClause(clazz);
+		return new FromClause(new SelectClause(), table(clazz));
 	}
 
 	/**
-	 * Builds default select statement (selecting PK) with given alias.
+	 * Builds default select statement (selecting PK, i.e. model selection) with given alias.
 	 * 
 	 * @param alias
 	 *           alias

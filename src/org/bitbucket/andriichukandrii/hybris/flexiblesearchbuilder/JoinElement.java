@@ -8,7 +8,7 @@ import de.hybris.platform.core.model.ItemModel;
 /**
  * 'JOIN' element of the flexible search query.
  */
-public class JoinElement extends TableFromClauseElement
+public class JoinElement extends AbstractTableFromClauseElement
 {
 	public static final String JOIN = "JOIN";
 
@@ -26,15 +26,13 @@ public class JoinElement extends TableFromClauseElement
 	 */
 	public JoinAliasElement as(final Alias alias)
 	{
-		this.endingClauseElement = false;
 		return new JoinAliasElement(this, alias);
 	}
 
 	@Override
-	protected void apply(final StringBuilder sb)
+	protected void appendQuery(final StringBuilder sb)
 	{
-		super.apply(sb);
+		super.appendQuery(sb);
 		sb.append(SPACE).append(JOIN).append(SPACE).append(getTypecode());
-		closeBracketsIfNeeded(sb);
 	}
 }
