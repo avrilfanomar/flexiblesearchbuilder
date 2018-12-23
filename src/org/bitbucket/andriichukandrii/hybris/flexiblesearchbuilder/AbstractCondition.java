@@ -3,7 +3,6 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.CombineConditionType.AND;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.CombineConditionType.OR;
 
-import java.util.Map;
 
 /**
  * Abstract condition of the flexible search query.
@@ -11,32 +10,18 @@ import java.util.Map;
 public abstract class AbstractCondition extends AbstractFlexibleSearchQueryChainElement
 {
 
-	public AbstractCondition(final AbstractCondition parent)
+	AbstractCondition(final AbstractFlexibleSearchQueryChainElement parent)
 	{
 		super(parent);
 	}
 
-	public CombineCondition and()
+	public CombineConditionElement and()
 	{
-		return new CombineCondition(this, AND);
+		return new CombineConditionElement(this, AND);
 	}
 
-	public CombineCondition or()
+	public CombineConditionElement or()
 	{
-		return new CombineCondition(this, OR);
-	}
-
-	protected void addParameters(final Map<String, Object> parameterMap)
-	{
-		if (getParent() != null)
-		{
-			getParent().addParameters(parameterMap);
-		}
-	}
-
-	@Override
-	protected AbstractCondition getParent()
-	{
-		return (AbstractCondition) parent;
+		return new CombineConditionElement(this, OR);
 	}
 }

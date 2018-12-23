@@ -18,16 +18,16 @@ public abstract class AbstractFieldCondition extends AbstractCondition
 		this.fieldName = fieldName;
 	}
 
-	protected AbstractFieldCondition(final AbstractCondition parent, final String fieldName)
+	protected AbstractFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName)
 	{
 		super(parent);
 		this.fieldName = fieldName;
 	}
 
 	@Override
-	protected void apply(final StringBuilder sb)
+	protected void appendQuery(final StringBuilder sb)
 	{
-		super.apply(sb);
+		super.appendQuery(sb);
 
 		sb.append(SPACE).append(OPENING_BRACKET).append(fieldName).append(CLOSING_BRACKET);
 	}

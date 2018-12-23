@@ -22,11 +22,12 @@ public class WhereClause extends TerminateQueryChainElement
 	}
 
 	@Override
-	protected void apply(final StringBuilder sb)
+	protected void appendQuery(final StringBuilder sb)
 	{
-		super.apply(sb);
+		super.appendQuery(sb);
+
 		sb.append(SPACE).append(WHERE);
-		lastCondition.apply(sb);
+		lastCondition.appendQuery(sb);
 	}
 
 	@Override
