@@ -41,7 +41,8 @@ final FlexibleSearchQuery query2 =
     .where(
         condition(ProductModel.NAME, IS_NOT_NULL)
         .or()
-        .condition(ProductModel.DESCRIPTION, IS_NOT_NULL))
+        .condition(ProductModel.DESCRIPTION, IS_NOT_NULL)
+    )
     .build();
 
 final Alias p = new Alias("p");
@@ -49,10 +50,12 @@ final Alias v = new Alias("v");
 final FlexibleSearchQuery query3 =
     select(p)
     .from(table(ProductModel.class).as(p)
-        .join(VariantProductModel.class).as(v)
-            .on(p.pk(), IS_EQUAL_TO, v.field(VariantProductModel.BASEPRODUCT)))
+    .join(VariantProductModel.class).as(v)
+            .on(p.pk(), IS_EQUAL_TO, v.field(VariantProductModel.BASEPRODUCT))
+    )
     .where(
-        condition(v.field(VariantProductModel.OFFLINEDATE), IS_GREATER_THAN, timeService.getCurrentTime()))
+        condition(v.field(VariantProductModel.OFFLINEDATE), IS_GREATER_THAN, timeService.getCurrentTime())
+    )
     .build();
 ```
 
