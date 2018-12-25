@@ -94,7 +94,7 @@ public class FlexibleSearchBuilderBasicTest
 				select(orderAlias)
 				.from(
 						table(OrderModel.class).as(orderAlias)
-						.join(OrderEntryModel.class).as(entryAlias)
+						.leftJoin(OrderEntryModel.class).as(entryAlias)
 								.on(orderAlias.pk(), IS_EQUAL_TO, entryAlias.field(OrderEntryModel.ORDER))
 						.join(ProductModel.class).as(productAlias)
 								.on(productAlias.pk(), IS_EQUAL_TO, entryAlias.field(OrderEntryModel.PRODUCT))
@@ -106,7 +106,7 @@ public class FlexibleSearchBuilderBasicTest
 				)
 				.build();
 
-		assertEquals("Query does not match", "SELECT {o.pk} FROM {Order AS o JOIN OrderEntry AS e ON " +
+		assertEquals("Query does not match", "SELECT {o.pk} FROM {Order AS o LEFT JOIN OrderEntry AS e ON " +
 				"{o.pk}={e.order} JOIN Product AS p ON {p.pk}={e.product}} WHERE {p.code}=?p.code1 AND {o.totalPrice}>?o.totalPrice1",
 				fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 2, fQuery.getQueryParameters().size());
