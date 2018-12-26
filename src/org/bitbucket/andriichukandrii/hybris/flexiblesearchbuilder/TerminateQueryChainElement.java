@@ -25,7 +25,11 @@ public abstract class TerminateQueryChainElement extends AbstractFlexibleSearchQ
 	{
 		final Map<String, Object> parameters = buildParameters();
 		final StringBuilder sb = buildQuery();
-		return new FlexibleSearchQuery(sb.toString(), parameters);
+		final FlexibleSearchQuery fQuery = new FlexibleSearchQuery(sb.toString(), parameters);
+
+		configureQuery(fQuery);
+
+		return fQuery;
 	}
 
 	protected abstract Map<String, Object> buildParameters();

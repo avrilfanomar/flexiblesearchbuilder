@@ -2,6 +2,8 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import static org.apache.commons.lang3.StringUtils.SPACE;
 
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
+
 import java.util.Collections;
 import java.util.Map;
 
@@ -47,5 +49,13 @@ public class FromClause extends TerminateQueryChainElement
 	protected Map<String, Object> buildParameters()
 	{
 		return Collections.emptyMap();
+	}
+
+	@Override
+	protected void configureQuery(final FlexibleSearchQuery flexibleSearchQuery)
+	{
+		super.configureQuery(flexibleSearchQuery);
+
+		lastElement.configureQuery(flexibleSearchQuery);
 	}
 }

@@ -2,8 +2,6 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import static org.apache.commons.lang3.StringUtils.SPACE;
 
-import java.util.Map;
-
 
 /**
  * Abstract condition on the model field (DB table column) of the flexible search query.
@@ -30,14 +28,5 @@ public abstract class AbstractFieldCondition extends AbstractCondition
 		super.appendQuery(sb);
 
 		sb.append(SPACE).append(OPENING_BRACKET).append(fieldName).append(CLOSING_BRACKET);
-	}
-
-	@Override
-	protected void addParameters(final Map<String, Object> parameterMap)
-	{
-		if (getParent() != null)
-		{
-			getParent().addParameters(parameterMap);
-		}
 	}
 }

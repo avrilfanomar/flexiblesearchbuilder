@@ -7,6 +7,7 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromCl
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterConditionType.IS_EQUAL_TO;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterConditionType.IS_GREATER_THAN;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NOT_NULL;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NULL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -17,9 +18,11 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 
 import org.junit.Test;
+import org.springframework.util.CollectionUtils;
 
 import de.hybris.platform.variants.model.VariantProductModel;
-import reactor.util.CollectionUtils;
+
+import java.util.Arrays;
 
 
 //This test relies on the constants and current implementation. However, it serves as a point of safety and a reference now.
@@ -80,6 +83,32 @@ public class FlexibleSearchBuilderBasicTest
 
 		assertEquals("Query does not match", "SELECT {o.pk} FROM {Order AS o JOIN OrderEntry AS e ON {o.pk}={e.order}}", fQuery.getQuery());
 		assertTrue("Non-expected parameter(-s) found", CollectionUtils.isEmpty(fQuery.getQueryParameters()));
+	}
+
+	@Test
+	public void testSelectFields()
+	{
+		final FlexibleSearchQuery fQuery =
+				select(
+						FieldWithType.of(ProductModel.NAME, String.class),
+						FieldWithType.of(ProductModel.DESCRIPTION, String.class),
+						FieldWithType.of(ProductModel.PK, Long.class)
+				)
+				.from(
+						table(ProductModel.class)
+				)
+				.where(
+						condition(ProductModel.SUMMARY, IS_NULL)
+						.and()
+						.condition(ProductModel.NAME, IS_NOT_NULL)
+						.and()
+						.condition(ProductModel.DESCRIPTION, IS_NOT_NULL)
+				)
+				.build();
+
+		assertEquals("Query does not match", "SELECT {name},{description},{pk} FROM {Product} WHERE {summary} IS NULL" +
+				" AND {name} IS NOT NULL AND {description} IS NOT NULL", fQuery.getQuery());
+		assertEquals("Result classes don't match", Arrays.asList(String.class, String.class, Long.class), fQuery.getResultClassList());
 	}
 
 	@Test

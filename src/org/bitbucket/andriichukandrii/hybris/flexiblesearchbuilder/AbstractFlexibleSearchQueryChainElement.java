@@ -1,5 +1,7 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
+
 import java.util.Map;
 
 
@@ -33,6 +35,14 @@ public abstract class AbstractFlexibleSearchQueryChainElement implements Flexibl
 		if (getParent() != null)
 		{
 			getParent().addParameters(parameterMap);
+		}
+	}
+
+	protected void configureQuery(final FlexibleSearchQuery flexibleSearchQuery)
+	{
+		if (getParent() != null)
+		{
+			getParent().configureQuery(flexibleSearchQuery);
 		}
 	}
 }
