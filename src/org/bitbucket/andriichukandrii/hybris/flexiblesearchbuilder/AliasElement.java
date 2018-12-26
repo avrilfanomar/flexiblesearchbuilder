@@ -1,7 +1,5 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
-import static org.apache.commons.lang3.StringUtils.SPACE;
-
 
 public class AliasElement extends JoinableFromClauseElement
 {

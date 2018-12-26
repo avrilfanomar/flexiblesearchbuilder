@@ -6,6 +6,7 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 public interface FlexibleSearchQueryChainElement
 {
 
+	String SPACE = " ";
 	String QUESTION_MARK = "?";
 	String OPENING_BRACKET = "{";
 	String CLOSING_BRACKET = "}";
