@@ -29,7 +29,7 @@ public class FieldToFieldCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(conditionType.getValue()).append(OPENING_BRACKET).append(secondFieldName).append(CLOSING_BRACKET);
+		sb.append(conditionType.getOperator()).append(OPENING_BRACKET).append(secondFieldName).append(CLOSING_BRACKET);
 	}
 
 }

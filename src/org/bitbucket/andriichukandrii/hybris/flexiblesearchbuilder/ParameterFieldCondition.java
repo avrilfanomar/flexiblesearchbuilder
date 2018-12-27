@@ -34,7 +34,7 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(conditionType.getValue()).append(QUESTION_MARK).append(parameterCode);
+		sb.append(conditionType.getOperator()).append(QUESTION_MARK).append(parameterCode);
 	}
 
 	@Override
