@@ -1,17 +1,19 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.CollectionAndQueryConditionType.IN;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Conditions.condition;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.select;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.selectFrom;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
-import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterConditionType.IS_EQUAL_TO;
-import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterConditionType.IS_GREATER_THAN;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_GREATER_THAN;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NOT_NULL;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NULL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import de.hybris.bootstrap.annotations.UnitTest;
+import de.hybris.platform.core.enums.Gender;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -21,8 +23,11 @@ import org.junit.Test;
 import org.springframework.util.CollectionUtils;
 
 import de.hybris.platform.variants.model.VariantProductModel;
+import de.hybris.platform.yacceleratorcore.model.ApparelProductModel;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 //This test relies on the constants and current implementation. However, it serves as a point of safety and a reference now.
@@ -65,6 +70,22 @@ public class FlexibleSearchBuilderBasicTest
 		assertEquals("Query does not match", "SELECT {pk} FROM {Order} WHERE {calculated}=?calculated1", fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 1, fQuery.getQueryParameters().size());
 		assertEquals("Query parameter doesn't match", false, fQuery.getQueryParameters().get("calculated1"));
+	}
+
+	@Test
+	public void testSelectWithCollectionParameterCondition()
+	{
+		final List<Gender> genders = Collections.singletonList(Gender.MALE);
+
+		final FlexibleSearchQuery fQuery =
+				selectFrom(ApparelProductModel.class)
+						.where(
+								condition(ApparelProductModel.GENDERS, IN, genders)
+						)
+						.build();
+		assertEquals("Query does not match", "SELECT {pk} FROM {ApparelProduct} WHERE {genders} IN (?genders1)", fQuery.getQuery());
+		assertEquals("Wrong number of query parameters", 1, fQuery.getQueryParameters().size());
+		assertEquals("Query parameter doesn't match", genders, fQuery.getQueryParameters().get("genders1"));
 	}
 
 	@Test

@@ -6,10 +6,10 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
  */
 public class FieldToFieldCondition extends AbstractFieldCondition
 {
-	private final ParameterConditionType conditionType;
+	private final RegularParameterConditionType conditionType;
 	private String secondFieldName;
 
-	FieldToFieldCondition(final String fieldName, final ParameterConditionType conditionType, final String secondFieldName)
+	FieldToFieldCondition(final String fieldName, final RegularParameterConditionType conditionType, final String secondFieldName)
 	{
 		super(fieldName);
 		this.conditionType = conditionType;
@@ -17,7 +17,7 @@ public class FieldToFieldCondition extends AbstractFieldCondition
 	}
 
 	FieldToFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName,
-			final ParameterConditionType conditionType, final String secondFieldName)
+						  final RegularParameterConditionType conditionType, final String secondFieldName)
 	{
 		super(parent, fieldName);
 		this.conditionType = conditionType;

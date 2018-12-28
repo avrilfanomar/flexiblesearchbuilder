@@ -23,6 +23,6 @@ public class ParameterlessFieldCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(SPACE).append(conditionType.getValue());
+		sb.append(SPACE).append(conditionType.getOperator());
 	}
 }

@@ -1,5 +1,6 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import java.util.Collection;
 import java.util.Map;
 
 
@@ -11,14 +12,15 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 {
 	private final ParameterConditionType conditionType;
 	private final Object conditionParameter;
+	private final boolean collectionParameter;
 	private String parameterCode;
 
-	ParameterFieldCondition(final String fieldName, final ParameterConditionType conditionType,
-			final Object conditionParameter)
+	ParameterFieldCondition(final String fieldName, final ParameterConditionType conditionType, final Object conditionParameter)
 	{
 		super(fieldName);
 		this.conditionType = conditionType;
 		this.conditionParameter = conditionParameter;
+		this.collectionParameter = conditionParameter instanceof Collection;
 	}
 
 	ParameterFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName,
@@ -27,6 +29,7 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 		super(parent, fieldName);
 		this.conditionType = conditionType;
 		this.conditionParameter = conditionParameter;
+		this.collectionParameter = conditionParameter instanceof Collection;
 	}
 
 	@Override
@@ -34,7 +37,8 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(conditionType.getOperator()).append(QUESTION_MARK).append(parameterCode);
+		sb.append(conditionType.getOperator()).append(collectionParameter ? OPENING_BRACE : "").append(QUESTION_MARK)
+				.append(parameterCode).append(collectionParameter ? CLOSING_BRACE : "");
 	}
 
 	@Override

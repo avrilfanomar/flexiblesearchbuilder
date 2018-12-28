@@ -10,6 +10,8 @@ public interface FlexibleSearchQueryChainElement
 	String QUESTION_MARK = "?";
 	String OPENING_BRACKET = "{";
 	String CLOSING_BRACKET = "}";
+	String OPENING_BRACE = "(";
+	String CLOSING_BRACE = ")";
 	String ALIAS_AND_FIELD_SEPARATOR = ".";
 	String FIELD_SEPARATOR = ",";
 

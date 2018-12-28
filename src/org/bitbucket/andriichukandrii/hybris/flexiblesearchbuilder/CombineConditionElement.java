@@ -1,6 +1,9 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 
+import java.util.Collection;
+
+
 public class CombineConditionElement extends AbstractFlexibleSearchQueryChainElement
 {
 	private final CombineConditionType combineOperator;
@@ -24,10 +27,27 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	 *           parameter
 	 * @return new field condition
 	 */
-	public AbstractFieldCondition condition(final String fieldName, final ParameterConditionType conditionType,
+	public AbstractFieldCondition condition(final String fieldName, final RegularParameterConditionType conditionType,
 			final Object conditionParameter)
 	{
 		return new ParameterFieldCondition(this, fieldName, conditionType, conditionParameter);
+	}
+
+	/**
+	 * Creates field condition with a given collection parameter.
+	 *
+	 * @param fieldName
+	 *           field name (from model item, e.g. ProductModel.NAME)
+	 * @param conditionType
+	 *           type of condition (which supports collection as parameter)
+	 * @param collectionConditionParameter
+	 *           collection parameter
+	 * @return new field condition
+	 */
+	public AbstractFieldCondition condition(final String fieldName, final CollectionAndQueryConditionType conditionType,
+			final Collection collectionConditionParameter)
+	{
+		return new ParameterFieldCondition(this, fieldName, conditionType, collectionConditionParameter);
 	}
 
 	/**
@@ -41,10 +61,27 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	 *           parameter
 	 * @return new field condition
 	 */
-	public AbstractFieldCondition condition(final AliasedField aliasedField, final ParameterConditionType conditionType,
+	public AbstractFieldCondition condition(final AliasedField aliasedField, final RegularParameterConditionType conditionType,
 			final Object conditionParameter)
 	{
 		return new ParameterFieldCondition(this, aliasedField.getValue(), conditionType, conditionParameter);
+	}
+
+	/**
+	 * Creates field condition with a given collection parameter.
+	 *
+	 * @param aliasedField
+	 *           field with alias
+	 * @param conditionType
+	 *           type of condition (which supports collection as parameter)
+	 * @param collectionConditionParameter
+	 *           collection parameter
+	 * @return new field condition
+	 */
+	public AbstractFieldCondition condition(final AliasedField aliasedField, final CollectionAndQueryConditionType conditionType,
+			Collection collectionConditionParameter)
+	{
+		return new ParameterFieldCondition(this, aliasedField.getValue(), conditionType, collectionConditionParameter);
 	}
 
 	/**
@@ -58,8 +95,8 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	 *           second field with alias
 	 * @return new field condition
 	 */
-	public AbstractFieldCondition condition(final AliasedField field1, final ParameterConditionType conditionType,
-											final AliasedField field2)
+	public AbstractFieldCondition condition(final AliasedField field1, final RegularParameterConditionType conditionType,
+			final AliasedField field2)
 	{
 		return new FieldToFieldCondition(this, field1.getValue(), conditionType, field2.getValue());
 	}
