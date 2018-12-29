@@ -6,10 +6,10 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Condit
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.select;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.selectFrom;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
-import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
-import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_GREATER_THAN;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NOT_NULL;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NULL;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_GREATER_THAN;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -19,18 +19,16 @@ import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.europe1.model.PriceRowModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
-
-import org.junit.Test;
-import org.springframework.util.CollectionUtils;
-
 import de.hybris.platform.variants.model.VariantProductModel;
 import de.hybris.platform.yacceleratorcore.model.ApparelProductModel;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Test;
+import org.springframework.util.CollectionUtils;
 
 
 //This test relies on the constants and current implementation. However, it serves as a point of safety and a reference now.
