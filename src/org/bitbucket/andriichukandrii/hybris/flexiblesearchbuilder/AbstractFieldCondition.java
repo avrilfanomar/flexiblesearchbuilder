@@ -25,6 +25,10 @@ public abstract class AbstractFieldCondition extends AbstractCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(SPACE).append(OPENING_BRACKET).append(fieldName).append(CLOSING_BRACKET);
+		if (parent != null)
+		{
+			sb.append(SPACE);
+		}
+		sb.append(OPENING_BRACKET).append(fieldName).append(CLOSING_BRACKET);
 	}
 }

@@ -18,7 +18,7 @@ public class JoinOnElement extends JoinableFromClauseElement
 	{
 		super.appendQuery(sb);
 
-		sb.append(SPACE).append(ON);
+		sb.append(SPACE).append(ON).append(SPACE);
 		condition.appendQuery(sb);
 	}
 }

@@ -26,7 +26,7 @@ public class WhereClause extends TerminateQueryChainElement
 	{
 		super.appendQuery(sb);
 
-		sb.append(SPACE).append(WHERE);
+		sb.append(SPACE).append(WHERE).append(SPACE);
 		lastCondition.appendQuery(sb);
 	}
 
@@ -39,7 +39,8 @@ public class WhereClause extends TerminateQueryChainElement
 	}
 
 	@Override
-	protected void configureQuery(final FlexibleSearchQuery flexibleSearchQuery) {
+	protected void configureQuery(final FlexibleSearchQuery flexibleSearchQuery)
+	{
 		super.configureQuery(flexibleSearchQuery);
 
 		lastCondition.configureQuery(flexibleSearchQuery);

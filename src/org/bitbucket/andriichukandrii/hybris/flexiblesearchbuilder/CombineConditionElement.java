@@ -45,7 +45,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	 * @return new field condition
 	 */
 	public AbstractFieldCondition condition(final String fieldName, final CollectionAndQueryConditionType conditionType,
-			final Collection collectionConditionParameter)
+			final Collection<?> collectionConditionParameter)
 	{
 		return new ParameterFieldCondition(this, fieldName, conditionType, collectionConditionParameter);
 	}
@@ -79,7 +79,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	 * @return new field condition
 	 */
 	public AbstractFieldCondition condition(final AliasedField aliasedField, final CollectionAndQueryConditionType conditionType,
-			Collection collectionConditionParameter)
+			Collection<?> collectionConditionParameter)
 	{
 		return new ParameterFieldCondition(this, aliasedField.getValue(), conditionType, collectionConditionParameter);
 	}
@@ -138,7 +138,19 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	 */
 	public AbstractFieldCondition condition(final AbstractFieldCondition condition)
 	{
-		return new WrapperCondition(this, condition);
+		return new FieldWrapperCondition(this, condition);
+	}
+
+	/**
+	 * Puts given condition (with chained conditions if any) into braces.
+	 *
+	 * @param condition
+	 *           condition to wrap
+	 * @return braced condition chain
+	 */
+	public BraceConditionWrapper braces(final AbstractCondition condition)
+	{
+		return new BraceConditionWrapper(this, condition);
 	}
 
 	@Override

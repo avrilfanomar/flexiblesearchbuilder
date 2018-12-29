@@ -100,4 +100,16 @@ public class Conditions
 	{
 		return new ParameterlessFieldCondition(aliasedField.getValue(), conditionType);
 	}
+
+	/**
+	 * Puts given condition (with chained conditions if any) into braces.
+	 * 
+	 * @param condition
+	 *           condition to wrap
+	 * @return braced condition chain
+	 */
+	public static BraceConditionWrapper braces(final AbstractCondition condition)
+	{
+		return new BraceConditionWrapper(condition);
+	}
 }

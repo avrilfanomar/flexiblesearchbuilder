@@ -1,18 +1,20 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
+
 import java.util.Map;
 
 
 /**
  * A proxy for a field condition.
  */
-public class WrapperCondition extends AbstractFieldCondition
+public class FieldWrapperCondition extends AbstractFieldCondition
 {
 
 	private final AbstractFieldCondition original;
 
 
-	WrapperCondition(final AbstractFlexibleSearchQueryChainElement parent, final AbstractFieldCondition condition)
+	FieldWrapperCondition(final AbstractFlexibleSearchQueryChainElement parent, final AbstractFieldCondition condition)
 	{
 		super(parent, condition.fieldName);
 		this.original = condition;
@@ -32,5 +34,12 @@ public class WrapperCondition extends AbstractFieldCondition
 		super.addParameters(parameterMap);
 
 		original.addParameters(parameterMap);
+	}
+
+	@Override
+	protected void configureQuery(final FlexibleSearchQuery flexibleSearchQuery) {
+		super.configureQuery(flexibleSearchQuery);
+
+		original.configureQuery(flexibleSearchQuery);
 	}
 }

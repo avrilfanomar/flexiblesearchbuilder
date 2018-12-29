@@ -1,6 +1,7 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.CollectionAndQueryConditionType.IN;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Conditions.braces;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Conditions.condition;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.select;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.selectFrom;
@@ -86,6 +87,26 @@ public class FlexibleSearchBuilderBasicTest
 		assertEquals("Query does not match", "SELECT {pk} FROM {ApparelProduct} WHERE {genders} IN (?genders1)", fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 1, fQuery.getQueryParameters().size());
 		assertEquals("Query parameter doesn't match", genders, fQuery.getQueryParameters().get("genders1"));
+	}
+
+	@Test
+	public void testSelectWithBracesAndParameterConditions()
+	{
+		final FlexibleSearchQuery fQuery =
+				selectFrom(OrderModel.class)
+						.where(
+								braces(
+									condition(OrderModel.SUBTOTAL, IS_NULL)
+									.or()
+									.condition(OrderModel.TOTALPRICE, IS_NULL)
+								)
+								.and()
+								.condition(OrderModel.CALCULATED, IS_EQUAL_TO, false)
+						)
+						.build();
+		assertEquals("Query does not match", "SELECT {pk} FROM {Order} WHERE ({subtotal} IS NULL OR {totalPrice} IS NULL) AND {calculated}=?calculated1", fQuery.getQuery());
+		assertEquals("Wrong number of query parameters", 1, fQuery.getQueryParameters().size());
+		assertEquals("Query parameter doesn't match", false, fQuery.getQueryParameters().get("calculated1"));
 	}
 
 	@Test
