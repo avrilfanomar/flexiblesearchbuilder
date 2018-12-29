@@ -3,8 +3,6 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 public class JoinOnElement extends JoinableFromClauseElement
 {
-	public static final String ON = "ON";
-
 	private final AbstractCondition condition;
 
 	JoinOnElement(final AbstractFlexibleSearchQueryChainElement parent, final AbstractCondition condition)

@@ -8,7 +8,6 @@ import de.hybris.platform.core.model.ItemModel;
  */
 public class InnerJoinElement extends AbstractJoinElement
 {
-	public static final String JOIN = "JOIN";
 
 	InnerJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
 	{

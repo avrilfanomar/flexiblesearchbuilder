@@ -8,7 +8,6 @@ import de.hybris.platform.core.model.ItemModel;
  */
 public class RightJoinElement extends AbstractJoinElement
 {
-	public static final String RIGHT_JOIN = "RIGHT JOIN";
 
 	RightJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
 	{

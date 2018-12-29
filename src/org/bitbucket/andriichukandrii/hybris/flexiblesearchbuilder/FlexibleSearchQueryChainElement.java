@@ -14,5 +14,13 @@ public interface FlexibleSearchQueryChainElement
 	String CLOSING_BRACE = ")";
 	String ALIAS_AND_FIELD_SEPARATOR = ".";
 	String FIELD_SEPARATOR = ",";
+	String SELECT = "SELECT";
+	String FROM = "FROM";
+	String AS = "AS";
+	String JOIN = "JOIN";
+	String ON = "ON";
+	String LEFT_JOIN = "LEFT JOIN";
+	String RIGHT_JOIN = "RIGHT JOIN";
+	String WHERE = "WHERE";
 
 }

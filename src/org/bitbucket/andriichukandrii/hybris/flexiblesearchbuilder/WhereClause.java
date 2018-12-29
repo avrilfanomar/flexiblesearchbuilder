@@ -11,8 +11,6 @@ import java.util.Map;
  */
 public class WhereClause extends TerminateQueryChainElement
 {
-	public static final String WHERE = "WHERE";
-
 	private AbstractCondition lastCondition;
 
 	WhereClause(final FromClause fromClause, final AbstractCondition condition)

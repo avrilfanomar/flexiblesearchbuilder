@@ -6,8 +6,6 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
  */
 public abstract class AbstractSelectClause extends AbstractFlexibleSearchQueryChainElement
 {
-	public static final String SELECT = "SELECT";
-
 
 	AbstractSelectClause()
 	{

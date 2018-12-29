@@ -1,8 +1,5 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
-import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.AliasElement.AS;
-
-
 public class JoinAliasElement extends AbstractFlexibleSearchQueryChainElement
 {
 	private final Alias alias;

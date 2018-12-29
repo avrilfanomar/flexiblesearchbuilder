@@ -8,7 +8,6 @@ import de.hybris.platform.core.model.ItemModel;
  */
 public class LeftJoinElement extends AbstractJoinElement
 {
-	public static final String LEFT_JOIN = "LEFT JOIN";
 
 	LeftJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
 	{

@@ -11,8 +11,6 @@ import java.util.Map;
  */
 public class FromClause extends TerminateQueryChainElement
 {
-	public static final String FROM = "FROM";
-
 	private final AbstractFromClauseElement lastElement;
 
 	FromClause(final AbstractFlexibleSearchQueryChainElement parent, final AbstractFromClauseElement lastElement)
