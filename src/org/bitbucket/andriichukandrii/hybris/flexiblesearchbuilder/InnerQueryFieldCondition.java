@@ -31,9 +31,9 @@ public class InnerQueryFieldCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(conditionType.getOperator()).append(OPENING_BRACE).append(OPENING_BRACKET).append(OPENING_BRACKET);
+		sb.append(conditionType.getOperator()).append(INNER_QUERY_OPENING_BRACKETS);
 		innerQuery.appendQuery(sb);
-		sb.append(CLOSING_BRACKET).append(CLOSING_BRACKET).append(CLOSING_BRACE);
+		sb.append(INNER_QUERY_CLOSING_BRACKETS);
 	}
 
 	@Override
