@@ -2,7 +2,6 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -29,11 +28,11 @@ public class WhereClause extends TerminateQueryChainElement
 	}
 
 	@Override
-	protected Map<String, Object> buildParameters()
+	protected void addParameters(final Map<String, Object> parameterMap)
 	{
-		final Map<String, Object> parameterMap = new HashMap<>();
+		super.addParameters(parameterMap);
+
 		lastCondition.addParameters(parameterMap);
-		return parameterMap;
 	}
 
 	@Override

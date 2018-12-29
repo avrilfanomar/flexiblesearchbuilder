@@ -51,6 +51,23 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	}
 
 	/**
+	 * Creates field condition with a given inner query.
+	 *
+	 * @param fieldName
+	 *           field name (from model item, e.g. ProductModel.NAME)
+	 * @param conditionType
+	 *           type of condition (which supports inner query as parameter)
+	 * @param innerQuery
+	 *           inner query
+	 * @return new field condition
+	 */
+	public AbstractFieldCondition condition(final String fieldName, final CollectionAndQueryConditionType conditionType,
+			TerminateQueryChainElement innerQuery)
+	{
+		return new InnerQueryFieldCondition(this, fieldName, conditionType, innerQuery);
+	}
+
+	/**
 	 * Creates field condition with a given parameter.
 	 *
 	 * @param aliasedField
@@ -82,6 +99,23 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 			Collection<?> collectionConditionParameter)
 	{
 		return new ParameterFieldCondition(this, aliasedField.getValue(), conditionType, collectionConditionParameter);
+	}
+
+	/**
+	 * Creates field condition with a given inner query.
+	 *
+	 * @param aliasedField
+	 *           field with alias
+	 * @param conditionType
+	 *           type of condition (which supports inner query as parameter)
+	 * @param innerQuery
+	 *           inner query
+	 * @return new field condition
+	 */
+	public AbstractFieldCondition condition(final AliasedField aliasedField, final CollectionAndQueryConditionType conditionType,
+			TerminateQueryChainElement innerQuery)
+	{
+		return new InnerQueryFieldCondition(this, aliasedField.getValue(), conditionType, innerQuery);
 	}
 
 	/**

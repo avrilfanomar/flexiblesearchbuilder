@@ -2,6 +2,7 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -32,7 +33,12 @@ public abstract class TerminateQueryChainElement extends AbstractFlexibleSearchQ
 		return fQuery;
 	}
 
-	protected abstract Map<String, Object> buildParameters();
+	private Map<String, Object> buildParameters()
+	{
+		final Map<String, Object> parameterMap = new HashMap<>();
+		addParameters(parameterMap);
+		return parameterMap;
+	}
 
 	private StringBuilder buildQuery()
 	{

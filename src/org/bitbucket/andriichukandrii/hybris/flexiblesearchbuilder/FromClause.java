@@ -2,7 +2,6 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 
-import java.util.Collections;
 import java.util.Map;
 
 
@@ -42,9 +41,11 @@ public class FromClause extends TerminateQueryChainElement
 	}
 
 	@Override
-	protected Map<String, Object> buildParameters()
+	protected void addParameters(final Map<String, Object> parameterMap)
 	{
-		return Collections.emptyMap();
+		super.addParameters(parameterMap);
+
+		lastElement.addParameters(parameterMap);
 	}
 
 	@Override

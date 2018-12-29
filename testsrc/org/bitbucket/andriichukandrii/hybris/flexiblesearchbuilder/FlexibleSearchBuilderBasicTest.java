@@ -15,9 +15,11 @@ import static org.junit.Assert.assertTrue;
 
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.core.enums.Gender;
+import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.europe1.model.PriceRowModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 
 import org.junit.Test;
@@ -151,6 +153,28 @@ public class FlexibleSearchBuilderBasicTest
 		assertEquals("Query does not match", "SELECT {name},{description},{pk} FROM {Product} WHERE {summary} IS NULL" +
 				" AND {name} IS NOT NULL AND {description} IS NOT NULL", fQuery.getQuery());
 		assertEquals("Result classes don't match", Arrays.asList(String.class, String.class, Long.class), fQuery.getResultClassList());
+	}
+
+	@Test
+	public void testSelectWithInnerQueryFieldCondition()
+	{
+		final TerminateQueryChainElement innerQuery =
+				selectFrom(MediaModel.class)
+				.where(
+						condition(MediaModel.REMOVABLE, IS_EQUAL_TO, true)
+				);
+		final FlexibleSearchQuery fQuery =
+				selectFrom(ProductModel.class)
+						.where(
+								condition(ProductModel.LOGO, IN, innerQuery)
+								.and()
+								.condition(ProductModel.SUMMARY, IS_NULL)
+						)
+						.build();
+		assertEquals("Query does not match", "SELECT {pk} FROM {Product} WHERE {logo} IN " +
+				"({{SELECT {pk} FROM {Media} WHERE {removable}=?removable1}}) AND {summary} IS NULL", fQuery.getQuery());
+		assertEquals("Wrong number of query parameters", 1, fQuery.getQueryParameters().size());
+		assertEquals("Query parameter doesn't match", true, fQuery.getQueryParameters().get("removable1"));
 	}
 
 	@Test
