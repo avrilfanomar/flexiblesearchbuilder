@@ -1,7 +1,5 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
-import static org.apache.commons.lang3.StringUtils.SPACE;
-
 
 public class ParameterlessFieldCondition extends AbstractFieldCondition
 {
@@ -25,6 +23,6 @@ public class ParameterlessFieldCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(SPACE).append(conditionType.getValue());
+		sb.append(SPACE).append(conditionType.getOperator());
 	}
 }

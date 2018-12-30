@@ -6,9 +6,23 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 public interface FlexibleSearchQueryChainElement
 {
 
-	char QUESTION_MARK = '?';
-	char OPENING_BRACKET = '{';
-	char CLOSING_BRACKET = '}';
-	char ALIAS_AND_FIELD_SEPARATOR = '.';
+	String SPACE = " ";
+	String QUESTION_MARK = "?";
+	String OPENING_BRACKET = "{";
+	String CLOSING_BRACKET = "}";
+	String OPENING_BRACE = "(";
+	String CLOSING_BRACE = ")";
+	String INNER_QUERY_OPENING_BRACKETS = OPENING_BRACE + OPENING_BRACKET + OPENING_BRACKET;
+	String INNER_QUERY_CLOSING_BRACKETS = CLOSING_BRACKET + CLOSING_BRACKET + CLOSING_BRACE;
+	String ALIAS_AND_FIELD_SEPARATOR = ".";
+	String FIELD_SEPARATOR = ",";
+	String SELECT = "SELECT";
+	String FROM = "FROM";
+	String AS = "AS";
+	String JOIN = "JOIN";
+	String ON = "ON";
+	String LEFT_JOIN = "LEFT JOIN";
+	String RIGHT_JOIN = "RIGHT JOIN";
+	String WHERE = "WHERE";
 
 }

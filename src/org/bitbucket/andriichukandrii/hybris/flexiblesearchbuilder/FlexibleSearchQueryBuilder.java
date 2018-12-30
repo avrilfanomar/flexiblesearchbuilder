@@ -4,6 +4,10 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromCl
 
 import de.hybris.platform.core.model.ItemModel;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class FlexibleSearchQueryBuilder
 {
@@ -17,18 +21,32 @@ public class FlexibleSearchQueryBuilder
 	 */
 	public static FromClause selectFrom(final Class<? extends ItemModel> clazz)
 	{
-		return new FromClause(new SelectClause(), table(clazz));
+		return new FromClause(new ModelSelectClause(), table(clazz));
+	}
+
+	/**
+	 * Builds select clause of given fields. Applies field types to flexible search query.
+	 * 
+	 * @param fieldsWithTypes
+	 *           fields and their types
+	 * @return select clause
+	 */
+	public static FieldSelectClause select(final FieldWithType... fieldsWithTypes)
+	{
+		final List<String> fields = Arrays.stream(fieldsWithTypes).map(FieldWithType::getField).collect(Collectors.toList());
+		final List<Class> types = Arrays.stream(fieldsWithTypes).map(FieldWithType::getType).collect(Collectors.toList());
+		return new FieldSelectClause(fields, types);
 	}
 
 	/**
 	 * Builds default select statement (selecting PK, i.e. model selection) with given alias.
-	 * 
+	 *
 	 * @param alias
 	 *           alias
 	 * @return select statement
 	 */
-	public static SelectClause select(final Alias alias)
+	public static ModelSelectClause select(final Alias alias)
 	{
-		return new SelectClause(alias.pk().getValue());
+		return new ModelSelectClause(alias.pk());
 	}
 }

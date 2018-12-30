@@ -1,9 +1,5 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
-import static org.apache.commons.lang3.StringUtils.SPACE;
-import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.AliasElement.AS;
-
-
 public class JoinAliasElement extends AbstractFlexibleSearchQueryChainElement
 {
 	private final Alias alias;
@@ -25,7 +21,7 @@ public class JoinAliasElement extends AbstractFlexibleSearchQueryChainElement
 	 *           second aliased field
 	 * @return "join on" query element
 	 */
-	public JoinOnElement on(final AliasedField field1, final ParameterConditionType condition, final AliasedField field2)
+	public JoinOnElement on(final AliasedField field1, final RegularParameterConditionType condition, final AliasedField field2)
 	{
 		return new JoinOnElement(this, new FieldToFieldCondition(field1.getValue(), condition, field2.getValue()));
 	}

@@ -1,13 +1,13 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
-public enum ParameterlessConditionType implements ConditionType
+public enum CollectionAndQueryConditionType implements QueryConditionType, ParameterConditionType
 {
-	IS_NULL("IS NULL"), IS_NOT_NULL("IS NOT NULL");
+	IN(" IN "), NOT_IN(" NOT IN ");
 
 
 	private final String operator;
 
-	ParameterlessConditionType(final String operator)
+	CollectionAndQueryConditionType(final String operator)
 	{
 		this.operator = operator;
 	}

@@ -1,18 +1,15 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
-import static org.apache.commons.lang3.StringUtils.SPACE;
-
 import de.hybris.platform.core.model.ItemModel;
 
 
 /**
- * 'JOIN' element of the flexible search query.
+ * Abstract 'JOIN' element of the flexible search query.
  */
-public class JoinElement extends AbstractTableFromClauseElement
+public abstract class AbstractJoinElement extends AbstractTableFromClauseElement
 {
-	public static final String JOIN = "JOIN";
 
-	JoinElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
+	AbstractJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
 	{
 		super(parent, clazz);
 	}
@@ -33,6 +30,9 @@ public class JoinElement extends AbstractTableFromClauseElement
 	protected void appendQuery(final StringBuilder sb)
 	{
 		super.appendQuery(sb);
-		sb.append(SPACE).append(JOIN).append(SPACE).append(getTypecode());
+
+		sb.append(SPACE).append(getJoinStatement()).append(SPACE).append(getTypecode());
 	}
+
+	protected abstract String getJoinStatement();
 }

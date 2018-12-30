@@ -1,8 +1,7 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
-import static org.apache.commons.lang3.StringUtils.SPACE;
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -11,8 +10,6 @@ import java.util.Map;
  */
 public class WhereClause extends TerminateQueryChainElement
 {
-	public static final String WHERE = "WHERE";
-
 	private AbstractCondition lastCondition;
 
 	WhereClause(final FromClause fromClause, final AbstractCondition condition)
@@ -26,15 +23,23 @@ public class WhereClause extends TerminateQueryChainElement
 	{
 		super.appendQuery(sb);
 
-		sb.append(SPACE).append(WHERE);
+		sb.append(SPACE).append(WHERE).append(SPACE);
 		lastCondition.appendQuery(sb);
 	}
 
 	@Override
-	protected Map<String, Object> buildParameters()
+	protected void addParameters(final Map<String, Object> parameterMap)
 	{
-		final Map<String, Object> parameterMap = new HashMap<>();
+		super.addParameters(parameterMap);
+
 		lastCondition.addParameters(parameterMap);
-		return parameterMap;
+	}
+
+	@Override
+	protected void configureQuery(final FlexibleSearchQuery flexibleSearchQuery)
+	{
+		super.configureQuery(flexibleSearchQuery);
+
+		lastCondition.configureQuery(flexibleSearchQuery);
 	}
 }
