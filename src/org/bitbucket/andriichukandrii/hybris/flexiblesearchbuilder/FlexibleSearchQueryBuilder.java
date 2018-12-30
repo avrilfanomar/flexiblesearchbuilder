@@ -34,7 +34,7 @@ public class FlexibleSearchQueryBuilder
 	public static FieldSelectClause select(final FieldWithType... fieldsWithTypes)
 	{
 		final List<String> fields = Arrays.stream(fieldsWithTypes).map(FieldWithType::getField).collect(Collectors.toList());
-		final List<Class> types = Arrays.stream(fieldsWithTypes).map(FieldWithType::getType).collect(Collectors.toList());
+		final List<Class<?>> types = Arrays.stream(fieldsWithTypes).map(FieldWithType::getType).collect(Collectors.toList());
 		return new FieldSelectClause(fields, types);
 	}
 

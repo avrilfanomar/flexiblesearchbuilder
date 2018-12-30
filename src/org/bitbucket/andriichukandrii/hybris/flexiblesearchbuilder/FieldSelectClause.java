@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 public class FieldSelectClause extends AbstractSelectClause
 {
 	private final List<String> fieldReferences;
-	private final List<Class> resultTypes;
+	private final List<Class<?>> resultTypes;
 
-	FieldSelectClause(final List<String> fieldReferences, final List<Class> resultTypes)
+	FieldSelectClause(final List<String> fieldReferences, final List<Class<?>> resultTypes)
 	{
 		this.fieldReferences = fieldReferences;
 		this.resultTypes = resultTypes;

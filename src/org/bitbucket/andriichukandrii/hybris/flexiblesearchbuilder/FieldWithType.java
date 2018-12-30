@@ -6,9 +6,9 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 public class FieldWithType
 {
 	private final String field;
-	private final Class type;
+	private final Class<?> type;
 
-	private FieldWithType(final String field, final Class type)
+	private FieldWithType(final String field, final Class<?> type)
 	{
 		this.field = field;
 		this.type = type;
@@ -23,7 +23,7 @@ public class FieldWithType
 	 *           field type
 	 * @return new FieldWithType instance of given parameters
 	 */
-	public static FieldWithType of(final String field, final Class type)
+	public static FieldWithType of(final String field, final Class<?> type)
 	{
 		return new FieldWithType(field, type);
 	}
@@ -33,7 +33,7 @@ public class FieldWithType
 		return field;
 	}
 
-	public Class getType()
+	public Class<?> getType()
 	{
 		return type;
 	}
