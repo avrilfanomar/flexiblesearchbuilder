@@ -187,6 +187,20 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 		return new BraceConditionWrapper(this, condition);
 	}
 
+	/**
+	 * Builds inner query condition.
+	 *
+	 * @param queryConditionType
+	 *           condition type
+	 * @param innerQuery
+	 *           inner query
+	 * @return inner query condition
+	 */
+	public AbstractCondition condition(final UnaryQueryConditionType queryConditionType, TerminateQueryChainElement innerQuery)
+	{
+		return new InnerQueryUnaryCondition(this, queryConditionType, innerQuery);
+	}
+
 	@Override
 	protected void appendQuery(final StringBuilder sb)
 	{

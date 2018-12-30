@@ -34,7 +34,7 @@ public class Conditions
 	 * @return new field condition
 	 */
 	public static AbstractFieldCondition condition(final String fieldName, final CollectionAndQueryConditionType conditionType,
-			final Collection collectionConditionParameter)
+			final Collection<?> collectionConditionParameter)
 	{
 		return new ParameterFieldCondition(fieldName, conditionType, collectionConditionParameter);
 	}
@@ -85,7 +85,7 @@ public class Conditions
 	 * @return new field condition
 	 */
 	public static AbstractFieldCondition condition(final AliasedField aliasedField,
-			final CollectionAndQueryConditionType conditionType, Collection collectionConditionParameter)
+			final CollectionAndQueryConditionType conditionType, Collection<?> collectionConditionParameter)
 	{
 		return new ParameterFieldCondition(aliasedField.getValue(), conditionType, collectionConditionParameter);
 	}
@@ -145,5 +145,20 @@ public class Conditions
 	public static BraceConditionWrapper braces(final AbstractCondition condition)
 	{
 		return new BraceConditionWrapper(condition);
+	}
+
+	/**
+	 * Builds inner query condition.
+	 * 
+	 * @param queryConditionType
+	 *           condition type
+	 * @param innerQuery
+	 *           inner query
+	 * @return inner query condition
+	 */
+	public static AbstractCondition condition(final UnaryQueryConditionType queryConditionType,
+			TerminateQueryChainElement innerQuery)
+	{
+		return new InnerQueryUnaryCondition(queryConditionType, innerQuery);
 	}
 }

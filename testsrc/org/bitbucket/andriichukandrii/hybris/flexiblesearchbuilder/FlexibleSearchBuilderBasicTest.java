@@ -10,6 +10,7 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Parame
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NULL;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_GREATER_THAN;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.UnaryQueryConditionType.EXISTS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -173,6 +174,36 @@ public class FlexibleSearchBuilderBasicTest
 				"({{SELECT {pk} FROM {Media} WHERE {removable}=?removable1}}) AND {summary} IS NULL", fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 1, fQuery.getQueryParameters().size());
 		assertEquals("Query parameter doesn't match", true, fQuery.getQueryParameters().get("removable1"));
+	}
+
+	@Test
+	public void testSelectWithInnerQueryUnaryCondition()
+	{
+		final Alias m = new Alias("m");
+		final Alias p = new Alias("p");
+		final TerminateQueryChainElement innerQuery =
+				select(m)
+				.from(
+						table(MediaModel.class).as(m)
+				)
+				.where(
+						condition(m.field(MediaModel.REMOVABLE), IS_EQUAL_TO, false)
+						.and()
+						.condition(m.field(MediaModel.MODIFIEDTIME), IS_GREATER_THAN, p.field(ProductModel.MODIFIEDTIME))
+				);
+		final FlexibleSearchQuery fQuery =
+				select(p)
+				.from(
+						table(ProductModel.class).as(p)
+				)
+				.where(
+						condition(EXISTS, innerQuery)
+				)
+				.build();
+		assertEquals("Query does not match", "SELECT {p.pk} FROM {Product AS p} WHERE EXISTS " +
+				"({{SELECT {m.pk} FROM {Media AS m} WHERE {m.removable}=?m.removable1 AND {m.modifiedtime}>{p.modifiedtime}}})", fQuery.getQuery());
+		assertEquals("Wrong number of query parameters", 1, fQuery.getQueryParameters().size());
+		assertEquals("Query parameter doesn't match", false, fQuery.getQueryParameters().get("m.removable1"));
 	}
 
 	@Test
