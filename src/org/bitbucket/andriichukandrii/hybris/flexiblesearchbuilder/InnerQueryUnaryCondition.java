@@ -34,7 +34,7 @@ public class InnerQueryUnaryCondition extends AbstractCondition
 		{
 			sb.append(SPACE);
 		}
-		sb.append(queryConditionType.getOperator()).append(INNER_QUERY_OPENING_BRACKETS);
+		sb.append(queryConditionType.getOperator()).append(SPACE).append(INNER_QUERY_OPENING_BRACKETS);
 		innerQuery.appendQuery(sb);
 		sb.append(INNER_QUERY_CLOSING_BRACKETS);
 	}
