@@ -17,10 +17,10 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Condit
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.select;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.selectFrom;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
-import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterConditionType.IS_EQUAL_TO;
-import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterConditionType.IS_GREATER_THAN;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NOT_NULL;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NULL;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_GREATER_THAN;
 
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.core.model.product.ProductModel;
