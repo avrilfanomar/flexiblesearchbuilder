@@ -201,6 +201,18 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 		return new InnerQueryUnaryCondition(this, queryConditionType, innerQuery);
 	}
 
+	/**
+	 * Creates custom condition of given string. Given string is trimmed to remove redundant spaces if any.
+	 *
+	 * @param customCondition
+	 *           custom condition string, e.g. "UPPER({name})=?name"
+	 * @return new custom condition element
+	 */
+	public AbstractCondition customCondition(final String customCondition)
+	{
+		return new CustomCondition(this, customCondition.trim());
+	}
+
 	@Override
 	protected void appendQuery(final StringBuilder sb)
 	{

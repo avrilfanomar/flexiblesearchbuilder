@@ -161,4 +161,16 @@ public class Conditions
 	{
 		return new InnerQueryUnaryCondition(queryConditionType, innerQuery);
 	}
+
+	/**
+	 * Creates custom condition of given string. Given string is trimmed to remove redundant spaces if any.
+	 * 
+	 * @param customCondition
+	 *           custom condition string, e.g. "UPPER({name})=?name"
+	 * @return new custom condition element
+	 */
+	public static AbstractCondition customCondition(final String customCondition)
+	{
+		return new CustomCondition(customCondition.trim());
+	}
 }

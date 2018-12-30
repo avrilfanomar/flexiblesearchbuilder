@@ -3,6 +3,7 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.CollectionAndQueryConditionType.IN;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Conditions.braces;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Conditions.condition;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Conditions.customCondition;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.select;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.selectFrom;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
@@ -88,6 +89,19 @@ public class FlexibleSearchBuilderBasicTest
 		assertEquals("Query does not match", "SELECT {pk} FROM {ApparelProduct} WHERE {genders} IN (?genders1)", fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 1, fQuery.getQueryParameters().size());
 		assertEquals("Query parameter doesn't match", genders, fQuery.getQueryParameters().get("genders1"));
+	}
+
+	@Test
+	public void testSelectWithCustomCondition()
+	{
+		final FlexibleSearchQuery fQuery =
+				selectFrom(ProductModel.class)
+				.where(
+						customCondition("UPPER({name})={name}")
+				)
+				.build();
+		assertEquals("Query does not match", "SELECT {pk} FROM {Product} WHERE UPPER({name})={name}", fQuery.getQuery());
+		assertEquals("Wrong number of query parameters", 0, fQuery.getQueryParameters().size());
 	}
 
 	@Test
