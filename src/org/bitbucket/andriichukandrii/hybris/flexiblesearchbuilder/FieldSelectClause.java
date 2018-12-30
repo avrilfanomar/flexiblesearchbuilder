@@ -1,9 +1,10 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchBuilderFieldUtils.buildFieldsQueryString;
+
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class FieldSelectClause extends AbstractSelectClause
@@ -20,10 +21,7 @@ public class FieldSelectClause extends AbstractSelectClause
 	@Override
 	protected void appendFieldsPart(final StringBuilder sb)
 	{
-		final String fieldsString = fieldReferences.stream().collect(
-				Collectors.joining(CLOSING_BRACKET + FIELD_SEPARATOR + OPENING_BRACKET, OPENING_BRACKET, CLOSING_BRACKET));
-
-		sb.append(fieldsString);
+		sb.append(buildFieldsQueryString(fieldReferences));
 	}
 
 	@Override

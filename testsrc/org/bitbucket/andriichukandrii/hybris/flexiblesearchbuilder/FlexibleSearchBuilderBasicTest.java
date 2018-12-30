@@ -221,6 +221,17 @@ public class FlexibleSearchBuilderBasicTest
 	}
 
 	@Test
+	public void testSelectWithOrderBy()
+	{
+		final FlexibleSearchQuery fQuery =
+				selectFrom(ProductModel.class)
+				.orderByAsc(ProductModel.CODE, ProductModel.CATALOGVERSION)
+				.build();
+		assertEquals("Query does not match", "SELECT {pk} FROM {Product} ORDER BY {code},{catalogVersion} ASC", fQuery.getQuery());
+		assertEquals("Wrong number of query parameters", 0, fQuery.getQueryParameters().size());
+	}
+
+	@Test
 	public void testSelectWithJoinAndDifferentConditions()
 	{
 		final Alias productAlias = new Alias("p");
