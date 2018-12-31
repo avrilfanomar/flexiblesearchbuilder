@@ -1,10 +1,10 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.VarargCollectionUtils.toStream;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
 
 import de.hybris.platform.core.model.ItemModel;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,14 +27,18 @@ public class FlexibleSearchQueryBuilder
 	/**
 	 * Builds select clause of given fields. Applies field types to flexible search query.
 	 * 
-	 * @param fieldsWithTypes
-	 *           fields and their types
+	 * @param firstFieldWithType
+	 *           first field-to-type mapping (which requires at least one argument)
+	 * @param restFieldsWithTypes
+	 *           rest fields and their types
 	 * @return select clause
 	 */
-	public static FieldSelectClause select(final FieldWithType... fieldsWithTypes)
+	public static FieldSelectClause select(final FieldWithType firstFieldWithType, final FieldWithType... restFieldsWithTypes)
 	{
-		final List<String> fields = Arrays.stream(fieldsWithTypes).map(FieldWithType::getField).collect(Collectors.toList());
-		final List<Class<?>> types = Arrays.stream(fieldsWithTypes).map(FieldWithType::getType).collect(Collectors.toList());
+		final List<String> fields = toStream(firstFieldWithType, restFieldsWithTypes).map(FieldWithType::getField).collect(
+				Collectors.toList());
+		final List<Class<?>> types = toStream(firstFieldWithType, restFieldsWithTypes).map(FieldWithType::getType).collect(
+				Collectors.toList());
 		return new FieldSelectClause(fields, types);
 	}
 
