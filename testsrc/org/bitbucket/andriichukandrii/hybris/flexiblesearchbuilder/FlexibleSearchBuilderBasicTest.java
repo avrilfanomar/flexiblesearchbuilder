@@ -265,10 +265,13 @@ public class FlexibleSearchBuilderBasicTest
 						.and()
 						.condition(orderAlias.field(OrderModel.TOTALPRICE), IS_GREATER_THAN, priceBarrier)
 				)
+				.groupBy(orderAlias.pk(), orderAlias.field(OrderModel.CODE), entryAlias.field(OrderEntryModel.ENTRYNUMBER))
+				.orderByDesc(orderAlias.field(OrderModel.CODE), entryAlias.field(OrderEntryModel.ENTRYNUMBER))
 				.build();
 
 		assertEquals("Query does not match", "SELECT {o.pk} FROM {Order AS o LEFT JOIN OrderEntry AS e ON " +
-				"{o.pk}={e.order} JOIN Product AS p ON {p.pk}={e.product}} WHERE {p.code}=?p.code1 AND {o.totalPrice}>?o.totalPrice1",
+				"{o.pk}={e.order} JOIN Product AS p ON {p.pk}={e.product}} WHERE {p.code}=?p.code1 AND {o.totalPrice}>?o.totalPrice1" +
+				" GROUP BY {o.pk},{o.code},{e.entryNumber} ORDER BY {o.code},{e.entryNumber} DESC",
 				fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 2, fQuery.getQueryParameters().size());
 		assertEquals("Query parameter doesn't match", productCode, fQuery.getQueryParameters().get("p.code1"));
