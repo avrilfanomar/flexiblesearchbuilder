@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 'FROM' clause of the flexible search query.
  */
-public class FromClause extends TerminateQueryChainElement implements OrderByAcceptable
+public class FromClause extends TerminateQueryChainElement implements OrderByAcceptable, GroupByAcceptable
 {
 	private final AbstractFromClauseElement lastElement;
 

@@ -232,6 +232,18 @@ public class FlexibleSearchBuilderBasicTest
 	}
 
 	@Test
+	public void testSelectWithGroupByAndOrderBy()
+	{
+		final FlexibleSearchQuery fQuery =
+				selectFrom(ProductModel.class)
+				.groupBy(ProductModel.PK, ProductModel.CODE, ProductModel.CATALOGVERSION)
+				.orderByDesc(ProductModel.CODE)
+				.build();
+		assertEquals("Query does not match", "SELECT {pk} FROM {Product} GROUP BY {pk},{code},{catalogVersion} ORDER BY {code} DESC", fQuery.getQuery());
+		assertEquals("Wrong number of query parameters", 0, fQuery.getQueryParameters().size());
+	}
+
+	@Test
 	public void testSelectWithJoinAndDifferentConditions()
 	{
 		final Alias productAlias = new Alias("p");
