@@ -1,10 +1,11 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
-import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.VarargCollectionUtils.toStream;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.VarargCollectionUtils.toStream;
 
 import de.hybris.platform.core.model.ItemModel;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +41,21 @@ public class FlexibleSearchQueryBuilder
 		final List<Class<?>> types = toStream(firstFieldWithType, restFieldsWithTypes).map(FieldWithType::getType).collect(
 				Collectors.toList());
 		return new FieldSelectClause(fields, types);
+	}
+
+	/**
+	 * Builds select clause with given custom fields statement. Puts given result types (if any) into flexible search
+	 * query.
+	 *
+	 * @param customFieldsStatement
+	 *           custom statement to put into select clause, e.g. "COUNT({pk})"
+	 * @param resultTypes
+	 *           result types, may be left empty
+	 * @return customized select clause
+	 */
+	public static CustomSelectClause selectCustom(final String customFieldsStatement, Class<?>... resultTypes)
+	{
+		return new CustomSelectClause(customFieldsStatement, Arrays.asList(resultTypes));
 	}
 
 	/**

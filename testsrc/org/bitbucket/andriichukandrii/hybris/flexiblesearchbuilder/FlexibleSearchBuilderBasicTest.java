@@ -5,6 +5,7 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Condit
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Conditions.condition;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Conditions.customCondition;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.select;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.selectCustom;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.selectFrom;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NOT_NULL;
@@ -166,6 +167,38 @@ public class FlexibleSearchBuilderBasicTest
 		assertEquals("Query does not match", "SELECT {name},{description},{pk} FROM {Product} WHERE {summary} IS NULL" +
 				" AND {name} IS NOT NULL AND {description} IS NOT NULL", fQuery.getQuery());
 		assertEquals("Result classes don't match", Arrays.asList(String.class, String.class, Long.class), fQuery.getResultClassList());
+	}
+
+	@Test
+	public void testSelectWithCustomStatement()
+	{
+		final FlexibleSearchQuery fQuery =
+				selectCustom(
+						"DISTINCT {code}"
+				)
+				.from(
+						table(ProductModel.class)
+				)
+				.build();
+		assertEquals("Query does not match", "SELECT DISTINCT {code} FROM {Product}", fQuery.getQuery());
+		assertEquals("Wrong number of query parameters", 0, fQuery.getQueryParameters().size());
+	}
+
+	@Test
+	public void testSelectWithCustomStatementAndResultTypes()
+	{
+		final FlexibleSearchQuery fQuery =
+				selectCustom(
+						"COUNT({pk}),{name}", Long.class, String.class
+				)
+				.from(
+						table(ProductModel.class)
+				)
+				.groupBy(ProductModel.NAME)
+				.build();
+		assertEquals("Query does not match", "SELECT COUNT({pk}),{name} FROM {Product} GROUP BY {name}", fQuery.getQuery());
+		assertEquals("Wrong number of query parameters", 0, fQuery.getQueryParameters().size());
+		assertEquals("Result classes don't match", Arrays.asList(Long.class, String.class), fQuery.getResultClassList());
 	}
 
 	@Test
