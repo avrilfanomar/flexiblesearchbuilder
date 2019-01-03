@@ -14,6 +14,11 @@ public abstract class AbstractJoinElement extends AbstractTableFromClauseElement
 		super(parent, clazz);
 	}
 
+	AbstractJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final String typeCode)
+	{
+		super(parent, typeCode);
+	}
+
 	/**
 	 * Marks the table with given alias.
 	 * 

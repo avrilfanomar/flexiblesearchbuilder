@@ -10,6 +10,11 @@ public class TableFromClauseElement extends AbstractTableFromClauseElement
 		super(null, clazz);
 	}
 
+	TableFromClauseElement(final String typeCode)
+	{
+		super(null, typeCode);
+	}
+
 	/**
 	 * Marks the table with given alias.
 	 *
