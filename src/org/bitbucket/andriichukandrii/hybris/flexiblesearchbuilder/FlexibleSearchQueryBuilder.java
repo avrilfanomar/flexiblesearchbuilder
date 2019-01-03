@@ -1,6 +1,7 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.VarargCollectionUtils.toStream;
 
 import de.hybris.platform.core.model.ItemModel;
 
@@ -27,15 +28,34 @@ public class FlexibleSearchQueryBuilder
 	/**
 	 * Builds select clause of given fields. Applies field types to flexible search query.
 	 * 
-	 * @param fieldsWithTypes
-	 *           fields and their types
+	 * @param firstFieldWithType
+	 *           first field-to-type mapping (which requires at least one argument)
+	 * @param restFieldsWithTypes
+	 *           rest fields and their types
 	 * @return select clause
 	 */
-	public static FieldSelectClause select(final FieldWithType... fieldsWithTypes)
+	public static FieldSelectClause select(final FieldWithType firstFieldWithType, final FieldWithType... restFieldsWithTypes)
 	{
-		final List<String> fields = Arrays.stream(fieldsWithTypes).map(FieldWithType::getField).collect(Collectors.toList());
-		final List<Class> types = Arrays.stream(fieldsWithTypes).map(FieldWithType::getType).collect(Collectors.toList());
+		final List<String> fields = toStream(firstFieldWithType, restFieldsWithTypes).map(FieldWithType::getField).collect(
+				Collectors.toList());
+		final List<Class<?>> types = toStream(firstFieldWithType, restFieldsWithTypes).map(FieldWithType::getType).collect(
+				Collectors.toList());
 		return new FieldSelectClause(fields, types);
+	}
+
+	/**
+	 * Builds select clause with given custom fields statement. Puts given result types (if any) into flexible search
+	 * query.
+	 *
+	 * @param customFieldsStatement
+	 *           custom statement to put into select clause, e.g. "COUNT({pk})"
+	 * @param resultTypes
+	 *           result types, may be left empty
+	 * @return customized select clause
+	 */
+	public static CustomSelectClause selectCustom(final String customFieldsStatement, Class<?>... resultTypes)
+	{
+		return new CustomSelectClause(customFieldsStatement, Arrays.asList(resultTypes));
 	}
 
 	/**

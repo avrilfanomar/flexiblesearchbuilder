@@ -2,7 +2,7 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 public enum UnaryQueryConditionType implements QueryConditionType
 {
-	EXISTS("EXISTS "), NOT_EXISTS("NOT EXISTS ");
+	EXISTS("EXISTS"), NOT_EXISTS("NOT EXISTS");
 
 
 	private final String operator;

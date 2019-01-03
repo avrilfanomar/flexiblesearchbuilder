@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 'WHERE' clause of a flexible search query.
  */
-public class WhereClause extends TerminateQueryChainElement
+public class WhereClause extends TerminateQueryChainElement implements OrderByAcceptable, GroupByAcceptable
 {
 	private AbstractCondition lastCondition;
 

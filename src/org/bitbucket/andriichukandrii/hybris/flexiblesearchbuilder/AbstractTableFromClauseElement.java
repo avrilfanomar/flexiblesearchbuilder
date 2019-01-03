@@ -8,15 +8,26 @@ import de.hybris.platform.core.model.ItemModel;
  */
 public abstract class AbstractTableFromClauseElement extends AbstractFromClauseElement
 {
-	private final Class<? extends ItemModel> clazz;
+	private final String typeCode;
 
 	AbstractTableFromClauseElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
 	{
 		super(parent);
-		this.clazz = clazz;
+		this.typeCode = fetchTypeCode(clazz);
+	}
+
+	AbstractTableFromClauseElement(final AbstractFlexibleSearchQueryChainElement parent, final String typeCode)
+	{
+		super(parent);
+		this.typeCode = typeCode;
 	}
 
 	protected String getTypecode()
+	{
+		return typeCode;
+	}
+
+	private String fetchTypeCode(final Class<? extends ItemModel> clazz)
 	{
 		try
 		{

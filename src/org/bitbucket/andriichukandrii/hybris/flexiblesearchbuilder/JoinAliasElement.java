@@ -1,5 +1,8 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
+
+
 public class JoinAliasElement extends AbstractFlexibleSearchQueryChainElement
 {
 	private final Alias alias;
@@ -24,6 +27,21 @@ public class JoinAliasElement extends AbstractFlexibleSearchQueryChainElement
 	public JoinOnElement on(final AliasedField field1, final RegularParameterConditionType condition, final AliasedField field2)
 	{
 		return new JoinOnElement(this, new FieldToFieldCondition(field1.getValue(), condition, field2.getValue()));
+	}
+
+	/**
+	 * Marks on which fields table joining should happen. Takes RegularParameterConditionType.IS_EQUAL_TO as the default
+	 * condition type.
+	 *
+	 * @param field1
+	 *           first aliased field
+	 * @param field2
+	 *           second aliased field
+	 * @return "join on" query element
+	 */
+	public JoinOnElement on(final AliasedField field1, final AliasedField field2)
+	{
+		return new JoinOnElement(this, new FieldToFieldCondition(field1.getValue(), IS_EQUAL_TO, field2.getValue()));
 	}
 
 	@Override

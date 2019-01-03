@@ -24,5 +24,7 @@ public interface FlexibleSearchQueryChainElement
 	String LEFT_JOIN = "LEFT JOIN";
 	String RIGHT_JOIN = "RIGHT JOIN";
 	String WHERE = "WHERE";
+	String ORDER_BY = "ORDER BY";
+	String GROUP_BY = "GROUP BY";
 
 }

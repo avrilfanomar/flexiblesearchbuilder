@@ -25,24 +25,19 @@ public abstract class AbstractFlexibleSearchQueryChainElement implements Flexibl
 		}
 	}
 
-	protected AbstractFlexibleSearchQueryChainElement getParent()
-	{
-		return parent;
-	}
-
 	protected void addParameters(final Map<String, Object> parameterMap)
 	{
-		if (getParent() != null)
+		if (parent != null)
 		{
-			getParent().addParameters(parameterMap);
+			parent.addParameters(parameterMap);
 		}
 	}
 
 	protected void configureQuery(final FlexibleSearchQuery flexibleSearchQuery)
 	{
-		if (getParent() != null)
+		if (parent != null)
 		{
-			getParent().configureQuery(flexibleSearchQuery);
+			parent.configureQuery(flexibleSearchQuery);
 		}
 	}
 }
