@@ -96,15 +96,15 @@ final Alias c = new Alias("c");
 final JoinOnElement joinTables =
         table(ProductModel.class).as(p)
         .leftJoin(ProductReferenceModel.class).as(r)
-            .on(p.pk(), r.field(TARGET))
+            .on(p.pk(), r.target())
         .leftJoin(OrderEntryModel.class).as(e)
-            .on(r.field(SOURCE), e.field(PRODUCT))
+            .on(r.source(), e.field(PRODUCT))
         .leftJoin(OrderModel.class).as(o)
             .on(o.pk(), e.field(ORDER))
         .leftJoin(CategoryConstants.Relations.CATEGORYPRODUCTRELATION).as(c2p)
-            .on(r.field(SOURCE), c2p.field(TARGET))
+            .on(r.source(), c2p.target())
         .leftJoin(CategoryModel.class).as(c)
-            .on(c.pk(), c2p.field(SOURCE));
+            .on(c.pk(), c2p.source());
 
 final FlexibleSearchQuery query4 =
         select(p)
