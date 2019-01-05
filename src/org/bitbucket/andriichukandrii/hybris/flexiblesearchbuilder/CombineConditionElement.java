@@ -170,9 +170,9 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	 *           condition to wrap
 	 * @return wrapped condition
 	 */
-	public AbstractFieldCondition condition(final AbstractFieldCondition condition)
+	public AbstractCondition condition(final AbstractFieldCondition condition)
 	{
-		return new FieldWrapperCondition(this, condition);
+		return new WrapperCondition(this, condition);
 	}
 
 	/**

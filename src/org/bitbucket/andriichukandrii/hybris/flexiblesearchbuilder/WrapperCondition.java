@@ -8,15 +8,14 @@ import java.util.Map;
 /**
  * A proxy for a field condition.
  */
-public class FieldWrapperCondition extends AbstractFieldCondition
+public class WrapperCondition extends AbstractCondition
 {
+	private final AbstractCondition original;
 
-	private final AbstractFieldCondition original;
 
-
-	FieldWrapperCondition(final AbstractFlexibleSearchQueryChainElement parent, final AbstractFieldCondition condition)
+	WrapperCondition(final AbstractFlexibleSearchQueryChainElement parent, final AbstractFieldCondition condition)
 	{
-		super(parent, condition.fieldName);
+		super(parent);
 		this.original = condition;
 	}
 
@@ -25,6 +24,7 @@ public class FieldWrapperCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
+		sb.append(SPACE);//needed because wrapped condition doesn't have a parent and thus doesn't add space
 		original.appendQuery(sb);
 	}
 
@@ -37,7 +37,8 @@ public class FieldWrapperCondition extends AbstractFieldCondition
 	}
 
 	@Override
-	protected void configureQuery(final FlexibleSearchQuery flexibleSearchQuery) {
+	protected void configureQuery(final FlexibleSearchQuery flexibleSearchQuery)
+	{
 		super.configureQuery(flexibleSearchQuery);
 
 		original.configureQuery(flexibleSearchQuery);
