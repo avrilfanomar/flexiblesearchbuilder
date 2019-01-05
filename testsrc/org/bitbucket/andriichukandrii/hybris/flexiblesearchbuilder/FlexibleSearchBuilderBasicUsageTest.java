@@ -36,7 +36,7 @@ import org.springframework.util.CollectionUtils;
 
 //This test relies on the constants and current implementation. However, it serves as a point of safety and a reference now.
 @UnitTest
-public class FlexibleSearchBuilderBasicTest
+public class FlexibleSearchBuilderBasicUsageTest
 {
 
 	@Test

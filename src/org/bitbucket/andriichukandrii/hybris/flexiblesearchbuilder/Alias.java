@@ -8,6 +8,9 @@ import de.hybris.platform.core.model.ItemModel;
  */
 public class Alias
 {
+	private static final String TARGET = "target";
+	private static final String SOURCE = "source";
+
 	private final String aliasValue;
 
 	public Alias(final String aliasValue)
@@ -40,5 +43,25 @@ public class Alias
 	public AliasedField pk()
 	{
 		return new AliasedField(this, ItemModel.PK);
+	}
+
+	/**
+	 * Creates aliased "target" field.
+	 * 
+	 * @return "target" aliased field
+	 */
+	public AliasedField target()
+	{
+		return new AliasedField(this, TARGET);
+	}
+
+	/**
+	 * Creates aliased "source" field.
+	 * 
+	 * @return "source" aliased field
+	 */
+	public AliasedField source()
+	{
+		return new AliasedField(this, SOURCE);
 	}
 }
