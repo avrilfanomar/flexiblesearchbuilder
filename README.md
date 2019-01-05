@@ -13,7 +13,8 @@ For development purposes it can be added as an extension either to localextensio
 
 All the elements of the builder chain are immutable (unless you pass a mutable parameter and then modify it), 
 thus they can be safely reused among different queries.
-Here's the examples of using the flexible search query builder
+
+Here are some examples of using the flexible search query builder
 ```java
 import static de.hybris.platform.catalog.model.ProductReferenceModel.SOURCE;
 import static de.hybris.platform.catalog.model.ProductReferenceModel.TARGET;
@@ -31,6 +32,7 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Parame
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NULL;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_GREATER_THAN;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.LIKE;
 
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.catalog.model.ProductReferenceModel;
@@ -43,7 +45,7 @@ import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.variants.model.VariantProductModel;
 
-
+import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.AbstractFieldCondition;
 import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Alias;
 import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.JoinOnElement;
 
@@ -54,15 +56,20 @@ final FlexibleSearchQuery query1 =
         condition(CatalogUnawareMediaModel.CODE, IS_EQUAL_TO, "someLogoCode"))
     .build();
 
-final FlexibleSearchQuery query2 = 
-    selectFrom(ProductModel.class)
-    .where(
+final AbstractFieldCondition nameAndDescriptionNonNull = 
         condition(ProductModel.NAME, IS_NOT_NULL)
-        .or()
-        .condition(ProductModel.DESCRIPTION, IS_NOT_NULL)
-    )
-    .orderByAsc(ProductModel.NAME)
-    .build();
+        .and()
+        .condition(ProductModel.DESCRIPTION, IS_NOT_NULL);
+
+final FlexibleSearchQuery query2 =
+        selectFrom(ProductModel.class)
+        .where(
+            condition(ProductModel.CODE, LIKE, "p%")
+            .and()
+            .condition(nameAndDescriptionNonNull)
+        )
+        .orderByAsc(ProductModel.NAME)
+        .build();
 
 final Alias p = new Alias("p");
 final Alias v = new Alias("v");
