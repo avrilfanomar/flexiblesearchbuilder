@@ -14,12 +14,8 @@ For development purposes it can be added as an extension either to localextensio
 All the elements of the builder chain are immutable (unless you pass a mutable parameter and then modify it), 
 thus they can be safely reused among different queries.
 
-Here are some examples of using the flexible search query builder
+Here are some examples of using the flexible search query builder (executable in groovy scripting console)
 ```java
-import static de.hybris.platform.catalog.model.ProductReferenceModel.SOURCE;
-import static de.hybris.platform.catalog.model.ProductReferenceModel.TARGET;
-import static de.hybris.platform.core.enums.Gender.FEMALE;
-import static de.hybris.platform.core.enums.Gender.MALE;
 import static de.hybris.platform.core.model.order.AbstractOrderEntryModel.ORDER;
 import static de.hybris.platform.core.model.order.AbstractOrderEntryModel.PRODUCT;
 import static de.hybris.platform.core.model.order.AbstractOrderModel.USER;
@@ -47,6 +43,7 @@ import de.hybris.platform.variants.model.VariantProductModel;
 
 import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.AbstractFieldCondition;
 import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Alias;
+import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FieldWithType;
 import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.JoinOnElement;
 
 
@@ -75,12 +72,31 @@ final Alias p = new Alias("p");
 final Alias v = new Alias("v");
 final FlexibleSearchQuery query3 =
     select(p)
-    .from(table(ProductModel.class).as(p)
-    .join(VariantProductModel.class).as(v)
-            .on(p.pk(), IS_EQUAL_TO, v.field(VariantProductModel.BASEPRODUCT))
+    .from(
+            table(ProductModel.class).as(p)
+            .join(VariantProductModel.class).as(v)
+                .on(p.pk(), IS_EQUAL_TO, v.field(VariantProductModel.BASEPRODUCT))
     )
     .where(
-        condition(v.field(VariantProductModel.OFFLINEDATE), IS_GREATER_THAN, timeService.getCurrentTime())
+            condition(v.field(VariantProductModel.OFFLINEDATE), IS_GREATER_THAN, timeService.getCurrentTime())
+    )
+    .build();
+
+final FlexibleSearchQuery query4 =
+    select(
+            FieldWithType.of(ProductModel.NAME, String.class),
+            FieldWithType.of(ProductModel.DESCRIPTION, String.class),
+            FieldWithType.of(ProductModel.PK, Long.class)
+    )
+    .from(
+            table(ProductModel.class)
+    )
+    .where(
+            condition(ProductModel.SUMMARY, IS_NULL)
+            .and()
+            .condition(ProductModel.NAME, IS_NOT_NULL)
+            .and()
+            .condition(ProductModel.DESCRIPTION, IS_NOT_NULL)
     )
     .build();
 
@@ -106,7 +122,7 @@ final JoinOnElement joinTables =
         .leftJoin(CategoryModel.class).as(c)
             .on(c.pk(), c2p.source());
 
-final FlexibleSearchQuery query4 =
+final FlexibleSearchQuery query5 =
         select(p)
         .from(joinTables)
         .where(
