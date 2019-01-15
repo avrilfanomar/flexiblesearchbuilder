@@ -26,5 +26,6 @@ public interface FlexibleSearchQueryChainElement
 	String WHERE = "WHERE";
 	String ORDER_BY = "ORDER BY";
 	String GROUP_BY = "GROUP BY";
+	String HAVING = "HAVING";
 
 }

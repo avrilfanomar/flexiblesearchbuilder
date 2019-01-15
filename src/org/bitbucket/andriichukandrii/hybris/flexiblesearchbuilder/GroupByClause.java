@@ -15,6 +15,11 @@ public class GroupByClause extends TerminateQueryChainElement implements OrderBy
 		this.fields = fields;
 	}
 
+	public HavingClause having(final AbstractCondition condition)
+	{
+		return new HavingClause(this, condition);
+	}
+
 	@Override
 	protected void appendQuery(final StringBuilder sb)
 	{
