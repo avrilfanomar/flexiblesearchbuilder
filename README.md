@@ -6,6 +6,7 @@ The aim of this extension is to `write().flexibleSearchQueries().easily()` in co
 ## Installation
 
 It is released as a Java library.
+You can find jars at https://bitbucket.org/andriichukandrii/flexiblesearchbuilder/downloads/
 
 For development purposes it can be added as an extension either to localextensions.xml or to other extension dependencies.
 
