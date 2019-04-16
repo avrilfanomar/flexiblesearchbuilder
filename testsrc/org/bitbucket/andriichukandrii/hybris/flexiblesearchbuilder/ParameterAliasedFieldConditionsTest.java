@@ -3,7 +3,6 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 import static de.hybris.platform.core.model.product.ProductModel.NAME;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Conditions.condition;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.select;
-import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.selectFrom;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_GREATER_OR_EQUAL;

@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class WhereClause extends TerminateQueryChainElement implements OrderByAcceptable, GroupByAcceptable
 {
-	private AbstractCondition lastCondition;
+	private final AbstractCondition lastCondition;
 
 	WhereClause(final FromClause fromClause, final AbstractCondition condition)
 	{

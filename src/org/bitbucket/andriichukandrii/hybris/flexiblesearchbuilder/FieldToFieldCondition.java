@@ -7,7 +7,7 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 public class FieldToFieldCondition extends AbstractFieldCondition
 {
 	private final RegularParameterConditionType conditionType;
-	private String secondFieldName;
+	private final String secondFieldName;
 
 	FieldToFieldCondition(final String fieldName, final RegularParameterConditionType conditionType, final String secondFieldName)
 	{
