@@ -28,6 +28,20 @@ public class FieldWithType
 		return new FieldWithType(field, type);
 	}
 
+	/**
+	 * Creates this field-to-type mapping class.
+	 *
+	 * @param field
+	 *           field
+	 * @param type
+	 *           field type
+	 * @return new FieldWithType instance of given parameters
+	 */
+	public static FieldWithType of(final AliasedField field, final Class<?> type)
+	{
+		return new FieldWithType(field.getValue(), type);
+	}
+
 	public String getField()
 	{
 		return field;

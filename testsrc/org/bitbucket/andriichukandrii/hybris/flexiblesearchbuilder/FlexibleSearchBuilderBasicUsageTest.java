@@ -170,6 +170,30 @@ public class FlexibleSearchBuilderBasicUsageTest
 	}
 
 	@Test
+	public void testSelectAliasedFields()
+	{
+		final Alias p = new Alias("p");
+		final FlexibleSearchQuery fQuery =
+				select(
+						FieldWithType.of(p.field(ProductModel.NAME), String.class),
+						FieldWithType.of(p.pk(), Long.class)
+				)
+				.from(
+						table(ProductModel.class).as(p)
+				)
+				.where(
+						condition(p.field(ProductModel.SUMMARY), IS_NULL)
+						.and()
+						.condition(p.field(ProductModel.NAME), IS_NOT_NULL)
+				)
+				.build();
+
+		assertEquals("Query does not match", "SELECT {p.name},{p.pk} FROM {Product AS p} WHERE {p.summary} IS NULL" +
+				" AND {p.name} IS NOT NULL", fQuery.getQuery());
+		assertEquals("Result classes don't match", Arrays.asList(String.class, Long.class), fQuery.getResultClassList());
+	}
+
+	@Test
 	public void testSelectWithCustomStatement()
 	{
 		final FlexibleSearchQuery fQuery =
