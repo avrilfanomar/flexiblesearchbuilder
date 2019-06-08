@@ -19,7 +19,7 @@ public class Conditions
 	public static AbstractFieldCondition condition(final String fieldName, final RegularParameterConditionType conditionType,
 			final Object conditionParameter)
 	{
-		return new ParameterFieldCondition(fieldName, conditionType, conditionParameter);
+		return new ParameterFieldCondition(new SimpleField(fieldName), conditionType, conditionParameter);
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Conditions
 	public static AbstractFieldCondition condition(final String fieldName, final CollectionAndQueryConditionType conditionType,
 			final Collection<?> collectionConditionParameter)
 	{
-		return new ParameterFieldCondition(fieldName, conditionType, collectionConditionParameter);
+		return new ParameterFieldCondition(new SimpleField(fieldName), conditionType, collectionConditionParameter);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class Conditions
 	public static AbstractFieldCondition condition(final String fieldName, final CollectionAndQueryConditionType conditionType,
 			TerminateQueryChainElement innerQuery)
 	{
-		return new InnerQueryFieldCondition(fieldName, conditionType, innerQuery);
+		return new InnerQueryFieldCondition(new SimpleField(fieldName), conditionType, innerQuery);
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class Conditions
 	public static AbstractFieldCondition condition(final AliasedField aliasedField,
 			final RegularParameterConditionType conditionType, final Object conditionParameter)
 	{
-		return new ParameterFieldCondition(aliasedField.getValue(), conditionType, conditionParameter);
+		return new ParameterFieldCondition(aliasedField, conditionType, conditionParameter);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class Conditions
 	public static AbstractFieldCondition condition(final AliasedField aliasedField,
 			final CollectionAndQueryConditionType conditionType, Collection<?> collectionConditionParameter)
 	{
-		return new ParameterFieldCondition(aliasedField.getValue(), conditionType, collectionConditionParameter);
+		return new ParameterFieldCondition(aliasedField, conditionType, collectionConditionParameter);
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class Conditions
 	public static AbstractFieldCondition condition(final AliasedField aliasedField,
 			final CollectionAndQueryConditionType conditionType, TerminateQueryChainElement innerQuery)
 	{
-		return new InnerQueryFieldCondition(aliasedField.getValue(), conditionType, innerQuery);
+		return new InnerQueryFieldCondition(aliasedField, conditionType, innerQuery);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class Conditions
 	 */
 	public static AbstractFieldCondition condition(final String fieldName, final ParameterlessConditionType conditionType)
 	{
-		return new ParameterlessFieldCondition(fieldName, conditionType);
+		return new ParameterlessFieldCondition(new SimpleField(fieldName), conditionType);
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class Conditions
 	 */
 	public static AbstractFieldCondition condition(final AliasedField aliasedField, final ParameterlessConditionType conditionType)
 	{
-		return new ParameterlessFieldCondition(aliasedField.getValue(), conditionType);
+		return new ParameterlessFieldCondition(aliasedField, conditionType);
 	}
 
 	/**

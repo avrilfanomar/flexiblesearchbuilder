@@ -37,8 +37,8 @@ public class ParameterAliasedFieldConditionsTest
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}=?p.name1", query.getQuery());
-		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("p.name1"));
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}=?name1", query.getQuery());
+		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
 	@Test
@@ -52,8 +52,8 @@ public class ParameterAliasedFieldConditionsTest
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}<>?p.name1", query.getQuery());
-		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("p.name1"));
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}<>?name1", query.getQuery());
+		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
 	@Test
@@ -67,8 +67,8 @@ public class ParameterAliasedFieldConditionsTest
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}<?p.name1", query.getQuery());
-		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("p.name1"));
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}<?name1", query.getQuery());
+		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
 	@Test
@@ -82,8 +82,8 @@ public class ParameterAliasedFieldConditionsTest
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}<=?p.name1", query.getQuery());
-		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("p.name1"));
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}<=?name1", query.getQuery());
+		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
 	@Test
@@ -97,8 +97,8 @@ public class ParameterAliasedFieldConditionsTest
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}>?p.name1", query.getQuery());
-		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("p.name1"));
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}>?name1", query.getQuery());
+		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
 	@Test
@@ -112,8 +112,8 @@ public class ParameterAliasedFieldConditionsTest
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}>=?p.name1", query.getQuery());
-		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("p.name1"));
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}>=?name1", query.getQuery());
+		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
 	@Test
@@ -127,8 +127,8 @@ public class ParameterAliasedFieldConditionsTest
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name} LIKE ?p.name1", query.getQuery());
-		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("p.name1"));
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name} LIKE ?name1", query.getQuery());
+		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
 	@Test
@@ -142,7 +142,7 @@ public class ParameterAliasedFieldConditionsTest
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name} NOT LIKE ?p.name1", query.getQuery());
-		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("p.name1"));
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name} NOT LIKE ?name1", query.getQuery());
+		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 }

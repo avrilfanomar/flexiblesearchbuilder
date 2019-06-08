@@ -7,10 +7,10 @@ import java.util.List;
 
 public class OrderByClause extends TerminateQueryChainElement
 {
-	private final List<String> fields;
+	private final List<FieldRepresentation> fields;
 	private final OrderBySortingType sortingType;
 
-	OrderByClause(final AbstractFlexibleSearchQueryChainElement parent, final List<String> fields,
+	OrderByClause(final AbstractFlexibleSearchQueryChainElement parent, final List<FieldRepresentation> fields,
 			final OrderBySortingType sortingType)
 	{
 		super(parent);

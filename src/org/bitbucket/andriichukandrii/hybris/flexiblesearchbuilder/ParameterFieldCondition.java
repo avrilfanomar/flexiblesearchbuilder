@@ -15,18 +15,18 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 	private final boolean collectionParameter;
 	private String parameterCode;
 
-	ParameterFieldCondition(final String fieldName, final ParameterConditionType conditionType, final Object conditionParameter)
+	ParameterFieldCondition(final Field field, final ParameterConditionType conditionType, final Object conditionParameter)
 	{
-		super(fieldName);
+		super(field);
 		this.conditionType = conditionType;
 		this.conditionParameter = conditionParameter;
 		this.collectionParameter = conditionParameter instanceof Collection;
 	}
 
-	ParameterFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName,
+	ParameterFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final Field field,
 			final ParameterConditionType conditionType, final Object conditionParameter)
 	{
-		super(parent, fieldName);
+		super(parent, field);
 		this.conditionType = conditionType;
 		this.conditionParameter = conditionParameter;
 		this.collectionParameter = conditionParameter instanceof Collection;
@@ -56,7 +56,7 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 		do
 		{
 			counter++;
-			this.parameterCode = this.fieldName + counter;
+			this.parameterCode = this.field.getFieldName() + counter;
 		}
 		while (parameterMap.get(this.parameterCode) != null);
 	}

@@ -6,18 +6,18 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
  */
 public abstract class AbstractFieldCondition extends AbstractCondition
 {
-	protected final String fieldName;
+	protected final Field field;
 
-	protected AbstractFieldCondition(final String fieldName)
+	protected AbstractFieldCondition(final Field field)
 	{
 		super(null);
-		this.fieldName = fieldName;
+		this.field = field;
 	}
 
-	protected AbstractFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName)
+	protected AbstractFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final Field field)
 	{
 		super(parent);
-		this.fieldName = fieldName;
+		this.field = field;
 	}
 
 	@Override
@@ -29,6 +29,6 @@ public abstract class AbstractFieldCondition extends AbstractCondition
 		{
 			sb.append(SPACE);
 		}
-		sb.append(OPENING_BRACKET).append(fieldName).append(CLOSING_BRACKET);
+		sb.append(field.toString());
 	}
 }

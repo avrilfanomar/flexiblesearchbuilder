@@ -162,8 +162,8 @@ public class CombineConditionsTest
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name} IS NULL OR {p.name} LIKE ?p.name1", query.getQuery());
-		assertEquals("Query parameters don't match", "%test%", query.getQueryParameters().get("p.name1"));
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name} IS NULL OR {p.name} LIKE ?name1", query.getQuery());
+		assertEquals("Query parameters don't match", "%test%", query.getQueryParameters().get("name1"));
 	}
 
 	@Test
@@ -181,8 +181,8 @@ public class CombineConditionsTest
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name} IS NULL OR {p.name} LIKE ?p.name1", query.getQuery());
-		assertEquals("Query parameters don't match", "%test%", query.getQueryParameters().get("p.name1"));
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name} IS NULL OR {p.name} LIKE ?name1", query.getQuery());
+		assertEquals("Query parameters don't match", "%test%", query.getQueryParameters().get("name1"));
 	}
 
 	@Test

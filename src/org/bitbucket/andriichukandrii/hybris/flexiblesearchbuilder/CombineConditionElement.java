@@ -30,7 +30,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	public AbstractFieldCondition condition(final String fieldName, final RegularParameterConditionType conditionType,
 			final Object conditionParameter)
 	{
-		return new ParameterFieldCondition(this, fieldName, conditionType, conditionParameter);
+		return new ParameterFieldCondition(this, new SimpleField(fieldName), conditionType, conditionParameter);
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	public AbstractFieldCondition condition(final String fieldName, final CollectionAndQueryConditionType conditionType,
 			final Collection<?> collectionConditionParameter)
 	{
-		return new ParameterFieldCondition(this, fieldName, conditionType, collectionConditionParameter);
+		return new ParameterFieldCondition(this, new SimpleField(fieldName), conditionType, collectionConditionParameter);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	public AbstractFieldCondition condition(final String fieldName, final CollectionAndQueryConditionType conditionType,
 			TerminateQueryChainElement innerQuery)
 	{
-		return new InnerQueryFieldCondition(this, fieldName, conditionType, innerQuery);
+		return new InnerQueryFieldCondition(this, new SimpleField(fieldName), conditionType, innerQuery);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	public AbstractFieldCondition condition(final AliasedField aliasedField, final RegularParameterConditionType conditionType,
 			final Object conditionParameter)
 	{
-		return new ParameterFieldCondition(this, aliasedField.getValue(), conditionType, conditionParameter);
+		return new ParameterFieldCondition(this, aliasedField, conditionType, conditionParameter);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	public AbstractFieldCondition condition(final AliasedField aliasedField, final CollectionAndQueryConditionType conditionType,
 			Collection<?> collectionConditionParameter)
 	{
-		return new ParameterFieldCondition(this, aliasedField.getValue(), conditionType, collectionConditionParameter);
+		return new ParameterFieldCondition(this, aliasedField, conditionType, collectionConditionParameter);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	public AbstractFieldCondition condition(final AliasedField aliasedField, final CollectionAndQueryConditionType conditionType,
 			TerminateQueryChainElement innerQuery)
 	{
-		return new InnerQueryFieldCondition(this, aliasedField.getValue(), conditionType, innerQuery);
+		return new InnerQueryFieldCondition(this, aliasedField, conditionType, innerQuery);
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	public AbstractFieldCondition condition(final AliasedField field1, final RegularParameterConditionType conditionType,
 			final AliasedField field2)
 	{
-		return new FieldToFieldCondition(this, field1.getValue(), conditionType, field2.getValue());
+		return new FieldToFieldCondition(this, field1, conditionType, field2);
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	 */
 	public AbstractFieldCondition condition(final String fieldName, final ParameterlessConditionType conditionType)
 	{
-		return new ParameterlessFieldCondition(this, fieldName, conditionType);
+		return new ParameterlessFieldCondition(this, new SimpleField(fieldName), conditionType);
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	 */
 	public AbstractFieldCondition condition(final AliasedField aliasedField, final ParameterlessConditionType conditionType)
 	{
-		return new ParameterlessFieldCondition(this, aliasedField.getValue(), conditionType);
+		return new ParameterlessFieldCondition(this, aliasedField, conditionType);
 	}
 
 	/**

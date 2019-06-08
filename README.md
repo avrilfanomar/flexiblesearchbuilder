@@ -30,6 +30,7 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Parame
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_GREATER_THAN;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.LIKE;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.SqlFunctions.count;
 
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.catalog.model.ProductReferenceModel;
@@ -45,6 +46,7 @@ import de.hybris.platform.variants.model.VariantProductModel;
 import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.AbstractFieldCondition;
 import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Alias;
 import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FieldWithType;
+import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FunctionWithType;
 import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.JoinOnElement;
 
 
@@ -133,6 +135,22 @@ final FlexibleSearchQuery query5 =
         )
         .orderByAsc(p.field(ProductModel.CODE))
         .build();
+
+final FlexibleSearchQuery query6 = 
+		select(
+				FunctionWithType.of(count(o.field(OrderModel.CODE)), Long.class),
+				FieldWithType.of(p.field(ProductModel.CODE), String.class)
+		)
+		.from(
+				table(ProductModel.class).as(p)
+				.join(OrderEntryModel.class).as(e)
+						.on(p.pk(), e.field(OrderEntryModel.PRODUCT))
+				.join(OrderModel.class).as(o)
+						.on(o.pk(), e.field(OrderEntryModel.ORDER))
+		)
+		.groupBy(p.field(ProductModel.CODE))
+		.orderByDesc(count(o.field(OrderModel.CODE)))
+		.build();
 
 ```
 

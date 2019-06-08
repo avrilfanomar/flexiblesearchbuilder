@@ -10,18 +10,18 @@ public class InnerQueryFieldCondition extends AbstractFieldCondition
 	private final CollectionAndQueryConditionType conditionType;
 	private final TerminateQueryChainElement innerQuery;
 
-	protected InnerQueryFieldCondition(final String fieldName, final CollectionAndQueryConditionType conditionType,
+	protected InnerQueryFieldCondition(final Field field, final CollectionAndQueryConditionType conditionType,
 			final TerminateQueryChainElement innerQuery)
 	{
-		super(fieldName);
+		super(field);
 		this.conditionType = conditionType;
 		this.innerQuery = innerQuery;
 	}
 
-	protected InnerQueryFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName,
+	protected InnerQueryFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final Field field,
 			final CollectionAndQueryConditionType conditionType, final TerminateQueryChainElement innerQuery)
 	{
-		super(parent, fieldName);
+		super(parent, field);
 		this.conditionType = conditionType;
 		this.innerQuery = innerQuery;
 	}

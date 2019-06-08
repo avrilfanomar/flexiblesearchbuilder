@@ -5,16 +5,16 @@ public class ParameterlessFieldCondition extends AbstractFieldCondition
 {
 	private final ParameterlessConditionType conditionType;
 
-	ParameterlessFieldCondition(final String fieldName, final ParameterlessConditionType conditionType)
+	ParameterlessFieldCondition(final Field field, final ParameterlessConditionType conditionType)
 	{
-		super(fieldName);
+		super(field);
 		this.conditionType = conditionType;
 	}
 
-	ParameterlessFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName,
+	ParameterlessFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final Field field,
 			final ParameterlessConditionType conditionType)
 	{
-		super(parent, fieldName);
+		super(parent, field);
 		this.conditionType = conditionType;
 	}
 

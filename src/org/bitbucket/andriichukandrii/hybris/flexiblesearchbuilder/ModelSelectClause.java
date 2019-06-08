@@ -5,21 +5,21 @@ import de.hybris.platform.core.model.ItemModel;
 
 public class ModelSelectClause extends AbstractSelectClause
 {
-	private final String field;
+	private final Field field;
 
 	ModelSelectClause()
 	{
-		field = ItemModel.PK;
+		field = new SimpleField(ItemModel.PK);
 	}
 
 	ModelSelectClause(final AliasedField aliasedField)
 	{
-		this.field = aliasedField.getValue();
+		this.field = aliasedField;
 	}
 
 	@Override
 	protected void appendFieldsPart(final StringBuilder sb)
 	{
-		sb.append(OPENING_BRACKET).append(field).append(CLOSING_BRACKET);
+		sb.append(field);
 	}
 }

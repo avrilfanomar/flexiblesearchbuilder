@@ -12,6 +12,7 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Parame
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NULL;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_GREATER_THAN;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.SqlFunctions.count;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.UnaryQueryConditionType.EXISTS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -272,9 +273,9 @@ public class FlexibleSearchBuilderBasicUsageTest
 				)
 				.build();
 		assertEquals("Query does not match", "SELECT {p.pk} FROM {Product AS p} WHERE EXISTS " +
-				"({{SELECT {m.pk} FROM {Media AS m} WHERE {m.removable}=?m.removable1 AND {m.modifiedtime}>{p.modifiedtime}}})", fQuery.getQuery());
+				"({{SELECT {m.pk} FROM {Media AS m} WHERE {m.removable}=?removable1 AND {m.modifiedtime}>{p.modifiedtime}}})", fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 1, fQuery.getQueryParameters().size());
-		assertEquals("Query parameter doesn't match", false, fQuery.getQueryParameters().get("m.removable1"));
+		assertEquals("Query parameter doesn't match", false, fQuery.getQueryParameters().get("removable1"));
 	}
 
 	@Test
@@ -297,6 +298,33 @@ public class FlexibleSearchBuilderBasicUsageTest
 				.orderByDesc(ProductModel.CODE)
 				.build();
 		assertEquals("Query does not match", "SELECT {pk} FROM {Product} GROUP BY {pk},{code},{catalogVersion} ORDER BY {code} DESC", fQuery.getQuery());
+		assertEquals("Wrong number of query parameters", 0, fQuery.getQueryParameters().size());
+	}
+
+	@Test
+	public void testSelectWithGroupByAndFunctions()
+	{
+		final Alias p = new Alias("p");
+		final Alias o = new Alias("o");
+		final Alias oe = new Alias("oe");
+
+		final FlexibleSearchQuery fQuery =
+				select(
+						FunctionWithType.of(count(o.field(OrderModel.CODE)), Long.class),
+						FieldWithType.of(p.field(ProductModel.CODE), String.class)
+				)
+				.from(
+						table(ProductModel.class).as(p)
+						.join(OrderEntryModel.class).as(oe)
+								.on(p.pk(), oe.field(OrderEntryModel.PRODUCT))
+						.join(OrderModel.class).as(o)
+								.on(o.pk(), oe.field(OrderEntryModel.ORDER))
+				)
+				.groupBy(p.field(ProductModel.CODE))
+				.orderByDesc(count(o.field(OrderModel.CODE)))
+				.build();
+		assertEquals("Query does not match", "SELECT COUNT({o.code}),{p.code} FROM {Product AS p JOIN OrderEntry " +
+				"AS oe ON {p.pk}={oe.product} JOIN Order AS o ON {o.pk}={oe.order}} GROUP BY {p.code} ORDER BY COUNT({o.code}) DESC", fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 0, fQuery.getQueryParameters().size());
 	}
 
@@ -327,11 +355,11 @@ public class FlexibleSearchBuilderBasicUsageTest
 				.build();
 
 		assertEquals("Query does not match", "SELECT {o.pk} FROM {Order AS o LEFT JOIN OrderEntry AS e ON " +
-				"{o.pk}={e.order} JOIN Product AS p ON {p.pk}={e.product}} WHERE {p.code}=?p.code1 AND {o.totalPrice}>?o.totalPrice1" +
+				"{o.pk}={e.order} JOIN Product AS p ON {p.pk}={e.product}} WHERE {p.code}=?code1 AND {o.totalPrice}>?totalPrice1" +
 				" GROUP BY {o.pk},{o.code},{e.entryNumber} ORDER BY {o.code},{e.entryNumber} DESC",
 				fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 2, fQuery.getQueryParameters().size());
-		assertEquals("Query parameter doesn't match", productCode, fQuery.getQueryParameters().get("p.code1"));
-		assertEquals("Query parameter doesn't match", priceBarrier, fQuery.getQueryParameters().get("o.totalPrice1"));
+		assertEquals("Query parameter doesn't match", productCode, fQuery.getQueryParameters().get("code1"));
+		assertEquals("Query parameter doesn't match", priceBarrier, fQuery.getQueryParameters().get("totalPrice1"));
 	}
 }

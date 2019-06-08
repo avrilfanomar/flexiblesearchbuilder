@@ -7,9 +7,9 @@ import java.util.List;
 
 public class GroupByClause extends TerminateQueryChainElement implements OrderByAcceptable
 {
-	private final List<String> fields;
+	private final List<Field> fields;
 
-	GroupByClause(final AbstractFlexibleSearchQueryChainElement parent, final List<String> fields)
+	GroupByClause(final AbstractFlexibleSearchQueryChainElement parent, final List<Field> fields)
 	{
 		super(parent);
 		this.fields = fields;

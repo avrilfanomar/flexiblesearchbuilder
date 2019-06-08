@@ -3,15 +3,14 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 /**
  * Maps field to it's type.
  */
-public class FieldWithType
+public class FieldWithType extends ValueWithType
 {
-	private final String field;
-	private final Class<?> type;
+	private final Field field;
 
-	private FieldWithType(final String field, final Class<?> type)
+	private FieldWithType(final Field field, final Class<?> type)
 	{
+		super(type);
 		this.field = field;
-		this.type = type;
 	}
 
 	/**
@@ -25,7 +24,7 @@ public class FieldWithType
 	 */
 	public static FieldWithType of(final String field, final Class<?> type)
 	{
-		return new FieldWithType(field, type);
+		return new FieldWithType(new SimpleField(field), type);
 	}
 
 	/**
@@ -39,16 +38,12 @@ public class FieldWithType
 	 */
 	public static FieldWithType of(final AliasedField field, final Class<?> type)
 	{
-		return new FieldWithType(field.getValue(), type);
+		return new FieldWithType(field, type);
 	}
 
-	public String getField()
+	@Override
+	public String getValue()
 	{
-		return field;
-	}
-
-	public Class<?> getType()
-	{
-		return type;
+		return field.toString();
 	}
 }

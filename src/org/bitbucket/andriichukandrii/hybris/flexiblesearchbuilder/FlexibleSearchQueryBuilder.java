@@ -28,19 +28,19 @@ public class FlexibleSearchQueryBuilder
 	/**
 	 * Builds select clause of given fields. Applies field types to flexible search query.
 	 * 
-	 * @param firstFieldWithType
+	 * @param firstValueWithType
 	 *           first field-to-type mapping (which requires at least one argument)
 	 * @param restFieldsWithTypes
 	 *           rest fields and their types
 	 * @return select clause
 	 */
-	public static FieldSelectClause select(final FieldWithType firstFieldWithType, final FieldWithType... restFieldsWithTypes)
+	public static SelectClause select(final ValueWithType firstValueWithType, final ValueWithType... restFieldsWithTypes)
 	{
-		final List<String> fields = toStream(firstFieldWithType, restFieldsWithTypes).map(FieldWithType::getField).collect(
+		final List<String> selectParameters = toStream(firstValueWithType, restFieldsWithTypes).map(ValueWithType::getValue)
+				.collect(Collectors.toList());
+		final List<Class<?>> types = toStream(firstValueWithType, restFieldsWithTypes).map(ValueWithType::getType).collect(
 				Collectors.toList());
-		final List<Class<?>> types = toStream(firstFieldWithType, restFieldsWithTypes).map(FieldWithType::getType).collect(
-				Collectors.toList());
-		return new FieldSelectClause(fields, types);
+		return new SelectClause(selectParameters, types);
 	}
 
 	/**

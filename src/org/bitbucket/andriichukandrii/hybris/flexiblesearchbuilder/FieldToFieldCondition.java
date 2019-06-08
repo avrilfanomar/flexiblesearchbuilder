@@ -7,21 +7,21 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 public class FieldToFieldCondition extends AbstractFieldCondition
 {
 	private final RegularParameterConditionType conditionType;
-	private final String secondFieldName;
+	private final Field secondField;
 
-	FieldToFieldCondition(final String fieldName, final RegularParameterConditionType conditionType, final String secondFieldName)
+	FieldToFieldCondition(final Field field, final RegularParameterConditionType conditionType, final Field secondField)
 	{
-		super(fieldName);
+		super(field);
 		this.conditionType = conditionType;
-		this.secondFieldName = secondFieldName;
+		this.secondField = secondField;
 	}
 
-	FieldToFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final String fieldName,
-						  final RegularParameterConditionType conditionType, final String secondFieldName)
+	FieldToFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final Field field,
+						  final RegularParameterConditionType conditionType, final Field secondField)
 	{
-		super(parent, fieldName);
+		super(parent, field);
 		this.conditionType = conditionType;
-		this.secondFieldName = secondFieldName;
+		this.secondField = secondField;
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class FieldToFieldCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(conditionType.getOperator()).append(OPENING_BRACKET).append(secondFieldName).append(CLOSING_BRACKET);
+		sb.append(conditionType.getOperator()).append(secondField.toString());
 	}
 
 }

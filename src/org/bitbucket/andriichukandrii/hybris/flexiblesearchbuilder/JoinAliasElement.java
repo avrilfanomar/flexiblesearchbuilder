@@ -26,7 +26,7 @@ public class JoinAliasElement extends AbstractFlexibleSearchQueryChainElement
 	 */
 	public JoinOnElement on(final AliasedField field1, final RegularParameterConditionType condition, final AliasedField field2)
 	{
-		return new JoinOnElement(this, new FieldToFieldCondition(field1.getValue(), condition, field2.getValue()));
+		return new JoinOnElement(this, new FieldToFieldCondition(field1, condition, field2));
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class JoinAliasElement extends AbstractFlexibleSearchQueryChainElement
 	 */
 	public JoinOnElement on(final AliasedField field1, final AliasedField field2)
 	{
-		return new JoinOnElement(this, new FieldToFieldCondition(field1.getValue(), IS_EQUAL_TO, field2.getValue()));
+		return new JoinOnElement(this, new FieldToFieldCondition(field1, IS_EQUAL_TO, field2));
 	}
 
 	@Override
