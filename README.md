@@ -53,53 +53,53 @@ import org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.JoinOnElement
 final FlexibleSearchQuery query1 = 
     selectFrom(CatalogUnawareMediaModel.class)
     .where(
-        condition(CatalogUnawareMediaModel.CODE, IS_EQUAL_TO, "someLogoCode"))
+		condition(CatalogUnawareMediaModel.CODE, IS_EQUAL_TO, "someLogoCode"))
     .build();
 
 final AbstractFieldCondition nameAndDescriptionNonNull = 
-        condition(ProductModel.NAME, IS_NOT_NULL)
-        .and()
-        .condition(ProductModel.DESCRIPTION, IS_NOT_NULL);
+	condition(ProductModel.NAME, IS_NOT_NULL)
+	.and()
+	.condition(ProductModel.DESCRIPTION, IS_NOT_NULL);
 
 final FlexibleSearchQuery query2 =
-        selectFrom(ProductModel.class)
-        .where(
-            condition(ProductModel.CODE, LIKE, "p%")
-            .and()
-            .condition(nameAndDescriptionNonNull)
-        )
-        .orderByAsc(ProductModel.NAME)
-        .build();
+	selectFrom(ProductModel.class)
+	.where(
+		condition(ProductModel.CODE, LIKE, "p%")
+		.and()
+		.condition(nameAndDescriptionNonNull)
+	)
+	.orderByAsc(ProductModel.NAME)
+	.build();
 
 final Alias p = new Alias("p");
 final Alias v = new Alias("v");
 final FlexibleSearchQuery query3 =
     select(p)
     .from(
-            table(ProductModel.class).as(p)
-            .join(VariantProductModel.class).as(v)
-                .on(p.pk(), IS_EQUAL_TO, v.field(VariantProductModel.BASEPRODUCT))
+		table(ProductModel.class).as(p)
+		.join(VariantProductModel.class).as(v)
+			.on(p.pk(), IS_EQUAL_TO, v.field(VariantProductModel.BASEPRODUCT))
     )
     .where(
-            condition(v.field(VariantProductModel.OFFLINEDATE), IS_GREATER_THAN, timeService.getCurrentTime())
+		condition(v.field(VariantProductModel.OFFLINEDATE), IS_GREATER_THAN, timeService.getCurrentTime())
     )
     .build();
 
 final FlexibleSearchQuery query4 =
     select(
-            FieldWithType.of(ProductModel.NAME, String.class),
-            FieldWithType.of(ProductModel.DESCRIPTION, String.class),
-            FieldWithType.of(ProductModel.PK, Long.class)
+		FieldWithType.of(ProductModel.NAME, String.class),
+		FieldWithType.of(ProductModel.DESCRIPTION, String.class),
+		FieldWithType.of(ProductModel.PK, Long.class)
     )
     .from(
-            table(ProductModel.class)
+		table(ProductModel.class)
     )
     .where(
-            condition(ProductModel.SUMMARY, IS_NULL)
-            .and()
-            .condition(ProductModel.NAME, IS_NOT_NULL)
-            .and()
-            .condition(ProductModel.DESCRIPTION, IS_NOT_NULL)
+		condition(ProductModel.SUMMARY, IS_NULL)
+		.and()
+		.condition(ProductModel.NAME, IS_NOT_NULL)
+		.and()
+		.condition(ProductModel.DESCRIPTION, IS_NOT_NULL)
     )
     .build();
 
@@ -113,44 +113,44 @@ final Alias c2p = new Alias("c2p");
 final Alias c = new Alias("c");
 
 final JoinOnElement joinTables =
-        table(ProductModel.class).as(p)
-        .leftJoin(ProductReferenceModel.class).as(r)
-            .on(p.pk(), r.target())
-        .leftJoin(OrderEntryModel.class).as(e)
-            .on(r.source(), e.field(PRODUCT))
-        .leftJoin(OrderModel.class).as(o)
-            .on(o.pk(), e.field(ORDER))
-        .leftJoin(CategoryConstants.Relations.CATEGORYPRODUCTRELATION).as(c2p)
-            .on(r.source(), c2p.target())
-        .leftJoin(CategoryModel.class).as(c)
-            .on(c.pk(), c2p.source());
+	table(ProductModel.class).as(p)
+	.leftJoin(ProductReferenceModel.class).as(r)
+		.on(p.pk(), r.target())
+	.leftJoin(OrderEntryModel.class).as(e)
+		.on(r.source(), e.field(PRODUCT))
+	.leftJoin(OrderModel.class).as(o)
+		.on(o.pk(), e.field(ORDER))
+	.leftJoin(CategoryConstants.Relations.CATEGORYPRODUCTRELATION).as(c2p)
+		.on(r.source(), c2p.target())
+	.leftJoin(CategoryModel.class).as(c)
+		.on(c.pk(), c2p.source());
 
 final FlexibleSearchQuery query5 =
-        select(p)
-        .from(joinTables)
-        .where(
-                condition(o.field(USER), IS_EQUAL_TO, user)
-                .and()
-                .condition(c.pk(), IS_EQUAL_TO, category)
-        )
-        .orderByAsc(p.field(ProductModel.CODE))
-        .build();
+	select(p)
+	.from(joinTables)
+	.where(
+		condition(o.field(USER), IS_EQUAL_TO, user)
+		.and()
+		.condition(c.pk(), IS_EQUAL_TO, category)
+	)
+	.orderByAsc(p.field(ProductModel.CODE))
+	.build();
 
 final FlexibleSearchQuery query6 = 
-		select(
-				FunctionWithType.of(count(o.field(OrderModel.CODE)), Long.class),
-				FieldWithType.of(p.field(ProductModel.CODE), String.class)
-		)
-		.from(
-				table(ProductModel.class).as(p)
-				.join(OrderEntryModel.class).as(e)
-						.on(p.pk(), e.field(OrderEntryModel.PRODUCT))
-				.join(OrderModel.class).as(o)
-						.on(o.pk(), e.field(OrderEntryModel.ORDER))
-		)
-		.groupBy(p.field(ProductModel.CODE))
-		.orderByDesc(count(o.field(OrderModel.CODE)))
-		.build();
+	select(
+		FunctionWithType.of(count(o.field(OrderModel.CODE)), Long.class),
+		FieldWithType.of(p.field(ProductModel.CODE), String.class)
+	)
+	.from(
+		table(ProductModel.class).as(p)
+		.join(OrderEntryModel.class).as(e)
+			.on(p.pk(), e.field(OrderEntryModel.PRODUCT))
+		.join(OrderModel.class).as(o)
+			.on(o.pk(), e.field(OrderEntryModel.ORDER))
+	)
+	.groupBy(p.field(ProductModel.CODE))
+	.orderByDesc(count(o.field(OrderModel.CODE)))
+	.build();
 
 ```
 
