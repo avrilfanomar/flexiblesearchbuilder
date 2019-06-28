@@ -31,13 +31,13 @@ public class ParameterAliasedFieldConditionsTest
 	{
 		final FlexibleSearchQuery query =
 				select(p)
-				.from(table(ProductModel.class))
+				.from(table(ProductModel.class).as(p))
 				.where(
 						condition(p.field(NAME), IS_EQUAL_TO, "TEST")
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}=?name1", query.getQuery());
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name}=?name1", query.getQuery());
 		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
@@ -46,13 +46,13 @@ public class ParameterAliasedFieldConditionsTest
 	{
 		final FlexibleSearchQuery query =
 				select(p)
-				.from(table(ProductModel.class))
+				.from(table(ProductModel.class).as(p))
 				.where(
 						condition(p.field(NAME), IS_NOT_EQUAL_TO, "TEST")
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}<>?name1", query.getQuery());
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name}<>?name1", query.getQuery());
 		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
@@ -61,13 +61,13 @@ public class ParameterAliasedFieldConditionsTest
 	{
 		final FlexibleSearchQuery query =
 				select(p)
-				.from(table(ProductModel.class))
+				.from(table(ProductModel.class).as(p))
 				.where(
 						condition(p.field(NAME), IS_LESS_THAN, "TEST")
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}<?name1", query.getQuery());
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name}<?name1", query.getQuery());
 		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
@@ -76,13 +76,13 @@ public class ParameterAliasedFieldConditionsTest
 	{
 		final FlexibleSearchQuery query =
 				select(p)
-				.from(table(ProductModel.class))
+				.from(table(ProductModel.class).as(p))
 				.where(
 						condition(p.field(NAME), IS_LESS_OR_EQUAL, "TEST")
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}<=?name1", query.getQuery());
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name}<=?name1", query.getQuery());
 		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
@@ -91,13 +91,13 @@ public class ParameterAliasedFieldConditionsTest
 	{
 		final FlexibleSearchQuery query =
 				select(p)
-				.from(table(ProductModel.class))
+				.from(table(ProductModel.class).as(p))
 				.where(
 						condition(p.field(NAME), IS_GREATER_THAN, "TEST")
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}>?name1", query.getQuery());
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name}>?name1", query.getQuery());
 		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
@@ -106,13 +106,13 @@ public class ParameterAliasedFieldConditionsTest
 	{
 		final FlexibleSearchQuery query =
 				select(p)
-				.from(table(ProductModel.class))
+				.from(table(ProductModel.class).as(p))
 				.where(
 						condition(p.field(NAME), IS_GREATER_OR_EQUAL, "TEST")
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name}>=?name1", query.getQuery());
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name}>=?name1", query.getQuery());
 		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
@@ -121,13 +121,13 @@ public class ParameterAliasedFieldConditionsTest
 	{
 		final FlexibleSearchQuery query =
 				select(p)
-				.from(table(ProductModel.class))
+				.from(table(ProductModel.class).as(p))
 				.where(
 						condition(p.field(NAME), LIKE, "TEST")
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name} LIKE ?name1", query.getQuery());
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name} LIKE ?name1", query.getQuery());
 		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 
@@ -136,13 +136,13 @@ public class ParameterAliasedFieldConditionsTest
 	{
 		final FlexibleSearchQuery query =
 				select(p)
-				.from(table(ProductModel.class))
+				.from(table(ProductModel.class).as(p))
 				.where(
 						condition(p.field(NAME), NOT_LIKE, "TEST")
 				)
 				.build();
 
-		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product} WHERE {p.name} NOT LIKE ?name1", query.getQuery());
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name} NOT LIKE ?name1", query.getQuery());
 		assertEquals("Query parameters don't match", "TEST", query.getQueryParameters().get("name1"));
 	}
 }
