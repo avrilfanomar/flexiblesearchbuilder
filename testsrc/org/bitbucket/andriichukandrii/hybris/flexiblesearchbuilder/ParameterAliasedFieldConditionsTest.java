@@ -2,6 +2,7 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import static de.hybris.platform.core.model.ItemModel.CREATIONTIME;
 import static de.hybris.platform.core.model.product.ProductModel.NAME;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Alias.alias;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Conditions.condition;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryBuilder.select;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
@@ -29,7 +30,7 @@ import org.junit.Test;
 @UnitTest
 public class ParameterAliasedFieldConditionsTest
 {
-	private final Alias p = new Alias("p");
+	private final Alias p = alias("p");
 
 	@Test
 	public void testEqualCondition()

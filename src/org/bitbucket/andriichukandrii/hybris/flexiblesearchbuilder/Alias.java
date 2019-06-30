@@ -19,6 +19,18 @@ public class Alias
 	}
 
 	/**
+	 * Creates alias from a given string value.
+	 * 
+	 * @param aliasValue
+	 *           alias string
+	 * @return alias
+	 */
+	public static Alias alias(final String aliasValue)
+	{
+		return new Alias(aliasValue);
+	}
+
+	/**
 	 * Creates field reference with this alias.
 	 * 
 	 * @param fieldName
