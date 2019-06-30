@@ -19,4 +19,8 @@ public class VarargCollectionUtils
 	{
 		return Stream.concat(Stream.of(first), Arrays.stream(rest));
 	}
+
+	private VarargCollectionUtils()
+	{
+	}
 }

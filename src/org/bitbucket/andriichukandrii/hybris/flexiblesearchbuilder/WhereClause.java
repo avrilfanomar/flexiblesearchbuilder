@@ -1,5 +1,8 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.SPACE;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.WHERE;
+
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 
 import java.util.Map;

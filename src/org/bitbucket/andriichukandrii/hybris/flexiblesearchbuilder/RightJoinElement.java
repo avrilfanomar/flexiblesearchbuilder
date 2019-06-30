@@ -1,5 +1,7 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.RIGHT_JOIN;
+
 import de.hybris.platform.core.model.ItemModel;
 
 

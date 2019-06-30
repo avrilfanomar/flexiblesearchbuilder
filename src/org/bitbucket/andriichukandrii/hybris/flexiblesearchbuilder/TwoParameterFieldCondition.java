@@ -1,6 +1,8 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchBuilderFieldUtils.createUniqueParameterCode;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.QUESTION_MARK;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.SPACE;
 
 import java.util.Map;
 

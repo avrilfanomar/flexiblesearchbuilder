@@ -1,5 +1,9 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.INNER_QUERY_CLOSING_BRACKETS;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.INNER_QUERY_OPENING_BRACKETS;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.SPACE;
+
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 
 import java.util.Map;

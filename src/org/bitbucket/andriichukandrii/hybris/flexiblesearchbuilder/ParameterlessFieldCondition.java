@@ -1,6 +1,9 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.SPACE;
+
+
 public class ParameterlessFieldCondition extends AbstractFieldCondition
 {
 	private final ParameterlessConditionType conditionType;

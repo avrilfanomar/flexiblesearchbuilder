@@ -121,4 +121,8 @@ public class SqlFunctions
 	{
 		return new SqlFunction(SqlFunctionType.MAX, field);
 	}
+
+	private SqlFunctions()
+	{
+	}
 }

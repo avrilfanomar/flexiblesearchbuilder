@@ -16,4 +16,8 @@ public class FromClauseElements
 	{
 		return new TableFromClauseElement(clazz);
 	}
+
+	private FromClauseElements()
+	{
+	}
 }

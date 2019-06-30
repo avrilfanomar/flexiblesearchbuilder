@@ -1,6 +1,8 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchBuilderFieldUtils.buildFieldsQueryString;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.ORDER_BY;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.SPACE;
 
 import java.util.List;
 

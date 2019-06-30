@@ -69,4 +69,8 @@ public class FlexibleSearchQueryBuilder
 	{
 		return new ModelSelectClause(alias.pk());
 	}
+
+	private FlexibleSearchQueryBuilder()
+	{
+	}
 }

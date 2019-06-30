@@ -1,6 +1,10 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.AS;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.SPACE;
+
+
 public class AliasElement extends JoinableFromClauseElement
 {
 	private final Alias alias;

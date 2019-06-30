@@ -1,6 +1,10 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.SELECT;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.SPACE;
+
+
 /**
  * 'SELECT' clause of the flexible search query, used to query the models.
  */

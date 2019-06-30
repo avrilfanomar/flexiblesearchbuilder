@@ -1,6 +1,9 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.SPACE;
+
+
 /**
  * Abstract condition on the model field (DB table column) of the flexible search query.
  */

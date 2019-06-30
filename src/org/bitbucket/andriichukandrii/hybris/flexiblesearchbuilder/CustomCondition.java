@@ -1,19 +1,22 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.SPACE;
+
+
 public class CustomCondition extends AbstractCondition
 {
-	private final String customCondition;
+	private final String conditionValue;
 
-	CustomCondition(final String customCondition)
+	CustomCondition(final String conditionValue)
 	{
 		super(null);
-		this.customCondition = customCondition;
+		this.conditionValue = conditionValue;
 	}
 
-	CustomCondition(final AbstractFlexibleSearchQueryChainElement parent, final String customCondition)
+	CustomCondition(final AbstractFlexibleSearchQueryChainElement parent, final String conditionValue)
 	{
 		super(parent);
-		this.customCondition = customCondition;
+		this.conditionValue = conditionValue;
 	}
 
 	@Override
@@ -25,6 +28,6 @@ public class CustomCondition extends AbstractCondition
 		{
 			sb.append(SPACE);
 		}
-		sb.append(customCondition);
+		sb.append(conditionValue);
 	}
 }

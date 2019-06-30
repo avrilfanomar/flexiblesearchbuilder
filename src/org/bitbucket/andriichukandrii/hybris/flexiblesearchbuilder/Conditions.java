@@ -212,4 +212,8 @@ public class Conditions
 	{
 		return new CustomCondition(customCondition.trim());
 	}
+
+	private Conditions()
+	{
+	}
 }
