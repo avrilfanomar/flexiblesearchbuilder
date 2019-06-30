@@ -1,5 +1,7 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchBuilderFieldUtils.createUniqueParameterCode;
+
 import java.util.Collection;
 import java.util.Map;
 
@@ -46,18 +48,8 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 	{
 		super.addParameters(parameterMap);
 
-		createUniqueParameterCode(parameterMap);
+		this.parameterCode = createUniqueParameterCode(parameterMap, this.field.getFieldName());
 		parameterMap.put(parameterCode, conditionParameter);
 	}
 
-	private void createUniqueParameterCode(final Map<String, Object> parameterMap)
-	{
-		int counter = 0;
-		do
-		{
-			counter++;
-			this.parameterCode = this.field.getFieldName() + counter;
-		}
-		while (parameterMap.get(this.parameterCode) != null);
-	}
 }

@@ -1,5 +1,6 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+import static de.hybris.platform.core.model.ItemModel.CREATIONTIME;
 import static de.hybris.platform.core.model.product.ProductModel.CODE;
 import static de.hybris.platform.core.model.product.ProductModel.NAME;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.CollectionAndQueryConditionType.IN;
@@ -11,6 +12,8 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromCl
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NOT_NULL;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NULL;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.LIKE;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.TwoParameterConditionType.BETWEEN;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.TwoParameterConditionType.NOT_BETWEEN;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.UnaryQueryConditionType.EXISTS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -18,6 +21,8 @@ import static org.junit.Assert.assertTrue;
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
+
+import java.util.Date;
 
 import org.junit.Test;
 
@@ -150,6 +155,28 @@ public class CombineConditionsTest
 	}
 
 	@Test
+	public void testParameterlessToTwoParameterCondition()
+	{
+		final Date dateStart = new Date();
+		final Date dateEnd = new Date();
+
+		final FlexibleSearchQuery query =
+				selectFrom(ProductModel.class)
+				.where(
+						condition(NAME, IS_NULL)
+						.or()
+						.condition(CREATIONTIME, BETWEEN, dateStart, dateEnd)
+				)
+				.build();
+
+		assertEquals("Query is not as expected", "SELECT {pk} FROM {Product} WHERE {name} IS NULL OR " +
+				"{creationtime} BETWEEN ?creationtime1 AND ?creationtime2", query.getQuery());
+		assertEquals("Query parameters size doesn't match", 2, query.getQueryParameters().size());
+		assertEquals("Query parameter 1 doesn't match", dateStart, query.getQueryParameters().get("creationtime1"));
+		assertEquals("Query parameter 2 doesn't match", dateEnd, query.getQueryParameters().get("creationtime2"));
+	}
+
+	@Test
 	public void testAliasedParameterlessToParameterCondition()
 	{
 		final FlexibleSearchQuery query =
@@ -218,5 +245,28 @@ public class CombineConditionsTest
 		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name} IS NULL AND {p.code} IN " +
 				"({{SELECT UPPER({code}) FROM {Product}}})", query.getQuery());
 		assertTrue("Query parameters don't match", query.getQueryParameters().isEmpty());
+	}
+
+	@Test
+	public void testAliasedParameterlessToTwoParameterCondition()
+	{
+		final Date dateStart = new Date();
+		final Date dateEnd = new Date();
+
+		final FlexibleSearchQuery query =
+				select(p)
+				.from(table(ProductModel.class).as(p))
+				.where(
+						condition(p.field(NAME), IS_NULL)
+						.and()
+						.condition(p.field(CREATIONTIME), NOT_BETWEEN, dateStart, dateEnd)
+				)
+				.build();
+
+		assertEquals("Query is not as expected", "SELECT {p.pk} FROM {Product AS p} WHERE {p.name} IS NULL AND " +
+				"{p.creationtime} NOT BETWEEN ?creationtime1 AND ?creationtime2", query.getQuery());
+		assertEquals("Query parameters size doesn't match", 2, query.getQueryParameters().size());
+		assertEquals("Query parameter 1 doesn't match", dateStart, query.getQueryParameters().get("creationtime1"));
+		assertEquals("Query parameter 2 doesn't match", dateEnd, query.getQueryParameters().get("creationtime2"));
 	}
 }

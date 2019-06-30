@@ -23,6 +23,26 @@ public class Conditions
 	}
 
 	/**
+	 * Creates field condition with a given parameters.
+	 *
+	 * @param fieldName
+	 *           field name (from model item, e.g. ProductModel.NAME)
+	 * @param conditionType
+	 *           type of condition
+	 * @param firstConditionParameter
+	 *           first parameter
+	 * @param secondConditionParameter
+	 *           second parameter
+	 * @return new field condition
+	 */
+	public static AbstractFieldCondition condition(final String fieldName, final TwoParameterConditionType conditionType,
+			final Object firstConditionParameter, final Object secondConditionParameter)
+	{
+		return new TwoParameterFieldCondition(new SimpleField(fieldName), conditionType, firstConditionParameter,
+				secondConditionParameter);
+	}
+
+	/**
 	 * Creates field condition with a given collection parameter.
 	 *
 	 * @param fieldName
@@ -71,6 +91,25 @@ public class Conditions
 			final RegularParameterConditionType conditionType, final Object conditionParameter)
 	{
 		return new ParameterFieldCondition(aliasedField, conditionType, conditionParameter);
+	}
+
+	/**
+	 * Creates field condition with a given parameter.
+	 *
+	 * @param aliasedField
+	 *           field with alias
+	 * @param conditionType
+	 *           type of condition
+	 * @param firstConditionParameter
+	 *           first parameter
+	 * @param secondConditionParameter
+	 *           second parameter
+	 * @return new field condition
+	 */
+	public static AbstractFieldCondition condition(final AliasedField aliasedField, final TwoParameterConditionType conditionType,
+			final Object firstConditionParameter, final Object secondConditionParameter)
+	{
+		return new TwoParameterFieldCondition(aliasedField, conditionType, firstConditionParameter, secondConditionParameter);
 	}
 
 	/**

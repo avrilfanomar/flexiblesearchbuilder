@@ -27,6 +27,7 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Flexib
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FromClauseElements.table;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NOT_NULL;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.ParameterlessConditionType.IS_NULL;
+import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.TwoParameterConditionType.BETWEEN;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_GREATER_THAN;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.LIKE;
@@ -99,7 +100,7 @@ final FlexibleSearchQuery query4 =
 		.and()
 		.condition(ProductModel.NAME, IS_NOT_NULL)
 		.and()
-		.condition(ProductModel.DESCRIPTION, IS_NOT_NULL)
+		.condition(ProductModel.PK, BETWEEN, 8796093054977L, 8796193054977L)
     )
     .build();
 
