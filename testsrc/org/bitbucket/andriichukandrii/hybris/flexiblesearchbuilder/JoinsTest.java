@@ -48,6 +48,29 @@ public class JoinsTest
 	}
 
 	@Test
+	public void testSelectTableByTypeCodeWithInnerJoins()
+	{
+		final FlexibleSearchQuery fQuery =
+				select(e)
+				.from(
+						table(_STOCKLEVELPRODUCTRELATION).as(sl2p)
+						.join(ProductModel.class).as(p)
+							.on(sl2p.target(), p.pk())
+						.join(OrderEntryModel.class).as(e)
+							.on(e.field(OrderEntryModel.PRODUCT), p.pk())
+						.join(OrderModel.class).as(o)
+							.on(e.field(OrderEntryModel.ORDER), o.pk())
+				)
+				.build();
+
+		assertEquals("Query does not match", "SELECT {e.pk} FROM {StockLevelProductRelation AS sl2p " +
+				"JOIN Product AS p ON {sl2p.target}={p.pk} " +
+				"JOIN OrderEntry AS e ON {e.product}={p.pk} " +
+				"JOIN Order AS o ON {e.order}={o.pk}}", fQuery.getQuery());
+		assertTrue("Non-expected parameter(-s) found", CollectionUtils.isEmpty(fQuery.getQueryParameters()));
+	}
+
+	@Test
 	public void testSelectWithRightJoin()
 	{
 		final FlexibleSearchQuery fQuery =

@@ -17,6 +17,18 @@ public class FromClauseElements
 		return new TableFromClauseElement(clazz);
 	}
 
+	/**
+	 * Creates table element by given type code.
+	 *
+	 * @param typeCode
+	 *           model type code
+	 * @return table element of the query
+	 */
+	public static TableFromClauseElement table(final String typeCode)
+	{
+		return new TableFromClauseElement(typeCode);
+	}
+
 	private FromClauseElements()
 	{
 	}
