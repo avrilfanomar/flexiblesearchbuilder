@@ -19,3 +19,5 @@ build.xml
 # Others
 platformhome.properties
 extensioninfo.xsd
+/src/org/bitbucket/andriichukandrii/constants/FlexiblesearchbuilderConstants.java
+/src/org/bitbucket/andriichukandrii/jalo/FlexiblesearchbuilderManager.java
