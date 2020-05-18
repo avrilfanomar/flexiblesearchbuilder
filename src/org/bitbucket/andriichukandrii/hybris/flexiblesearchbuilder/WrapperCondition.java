@@ -15,7 +15,7 @@ public class WrapperCondition extends AbstractCondition
 	private final AbstractCondition original;
 
 
-	WrapperCondition(final AbstractFlexibleSearchQueryChainElement parent, final AbstractFieldCondition condition)
+	WrapperCondition(final AbstractFlexibleSearchQueryChainElement parent, final AbstractCondition condition)
 	{
 		super(parent);
 		this.original = condition;
