@@ -9,7 +9,7 @@ public class CustomCondition extends AbstractCondition
 
 	CustomCondition(final String conditionValue)
 	{
-		super(null);
+		super(FlexibleSearchQueryStartChainElement.INSTANCE);
 		this.conditionValue = conditionValue;
 	}
 
@@ -24,7 +24,7 @@ public class CustomCondition extends AbstractCondition
 	{
 		super.appendQuery(sb);
 
-		if (parent != null)
+		if (!FlexibleSearchQueryStartChainElement.INSTANCE.equals(parent))
 		{
 			sb.append(SPACE);
 		}

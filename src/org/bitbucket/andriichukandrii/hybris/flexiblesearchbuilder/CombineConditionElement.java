@@ -6,7 +6,7 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Flexib
 import java.util.Collection;
 
 
-public class CombineConditionElement extends AbstractFlexibleSearchQueryChainElement
+public class CombineConditionElement extends FlexibleSearchQueryInnerChainElement
 {
 	private final CombineConditionType combineOperator;
 
@@ -259,10 +259,7 @@ public class CombineConditionElement extends AbstractFlexibleSearchQueryChainEle
 	{
 		super.appendQuery(sb);
 
-		if (combineOperator != null)
-		{
-			sb.append(SPACE).append(combineOperator.getValue());
-		}
+		sb.append(SPACE).append(combineOperator.getValue());
 	}
 
 }

@@ -1,6 +1,6 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
-public abstract class AbstractFromClauseElement extends AbstractFlexibleSearchQueryChainElement
+public abstract class AbstractFromClauseElement extends FlexibleSearchQueryInnerChainElement
 {
 
 	AbstractFromClauseElement(final AbstractFlexibleSearchQueryChainElement parent)

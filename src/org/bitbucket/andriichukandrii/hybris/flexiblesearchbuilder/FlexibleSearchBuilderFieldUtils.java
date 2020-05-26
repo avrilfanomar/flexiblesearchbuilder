@@ -32,7 +32,7 @@ class FlexibleSearchBuilderFieldUtils
 			counter++;
 			uniqueCode = fieldName + counter;
 		}
-		while (parameterMap.get(uniqueCode) != null);
+		while (parameterMap.containsKey(uniqueCode));
 
 		return uniqueCode;
 	}

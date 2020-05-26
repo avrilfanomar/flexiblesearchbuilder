@@ -8,12 +8,12 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Flexib
 /**
  * 'SELECT' clause of the flexible search query, used to query the models.
  */
-public abstract class AbstractSelectClause extends AbstractFlexibleSearchQueryChainElement
+public abstract class AbstractSelectClause extends FlexibleSearchQueryInnerChainElement
 {
 
 	AbstractSelectClause()
 	{
-		super(null);
+		super(FlexibleSearchQueryStartChainElement.INSTANCE);
 	}
 
 	/**

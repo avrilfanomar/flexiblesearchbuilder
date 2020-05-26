@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Part of the flexible search query, that can be the last one, thus having the build() method.
  */
-public abstract class TerminateQueryChainElement extends AbstractFlexibleSearchQueryChainElement
+public abstract class TerminateQueryChainElement extends FlexibleSearchQueryInnerChainElement
 {
 	TerminateQueryChainElement(final AbstractFlexibleSearchQueryChainElement parent)
 	{

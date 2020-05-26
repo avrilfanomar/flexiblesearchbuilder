@@ -21,7 +21,7 @@ public class BraceConditionWrapper extends AbstractCondition
 
 	BraceConditionWrapper(final AbstractCondition wrappedCondition)
 	{
-		super(null);
+		super(FlexibleSearchQueryStartChainElement.INSTANCE);
 		this.wrappedCondition = wrappedCondition;
 	}
 
@@ -30,7 +30,7 @@ public class BraceConditionWrapper extends AbstractCondition
 	{
 		super.appendQuery(sb);
 
-		if (parent != null)
+		if (!FlexibleSearchQueryStartChainElement.INSTANCE.equals(parent))
 		{
 			sb.append(SPACE);
 		}

@@ -2,6 +2,8 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import de.hybris.platform.core.model.ItemModel;
 
+import java.util.Optional;
+
 
 /**
  * Element of the 'FROM' clause that holds a model type, marking the database table.
@@ -31,7 +33,7 @@ public abstract class AbstractTableFromClauseElement extends AbstractFromClauseE
 	{
 		try
 		{
-			return clazz.getField("_TYPECODE").get(null).toString();
+			return clazz.getField("_TYPECODE").get(Optional.empty()).toString();
 		}
 		catch (final IllegalAccessException | NoSuchFieldException e)
 		{

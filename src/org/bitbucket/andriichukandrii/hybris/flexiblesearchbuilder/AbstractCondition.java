@@ -7,7 +7,7 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Combin
 /**
  * Abstract condition of the flexible search query.
  */
-public abstract class AbstractCondition extends AbstractFlexibleSearchQueryChainElement
+public abstract class AbstractCondition extends FlexibleSearchQueryInnerChainElement
 {
 
 	AbstractCondition(final AbstractFlexibleSearchQueryChainElement parent)

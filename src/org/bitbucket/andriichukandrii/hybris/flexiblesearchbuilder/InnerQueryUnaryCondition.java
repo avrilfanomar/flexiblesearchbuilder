@@ -16,7 +16,7 @@ public class InnerQueryUnaryCondition extends AbstractCondition
 
 	InnerQueryUnaryCondition(final UnaryQueryConditionType queryConditionType, final TerminateQueryChainElement innerQuery)
 	{
-		super(null);
+		super(FlexibleSearchQueryStartChainElement.INSTANCE);
 		this.innerQuery = innerQuery;
 		this.queryConditionType = queryConditionType;
 	}
@@ -34,7 +34,7 @@ public class InnerQueryUnaryCondition extends AbstractCondition
 	{
 		super.appendQuery(sb);
 
-		if (parent != null)
+		if (!FlexibleSearchQueryStartChainElement.INSTANCE.equals(parent))
 		{
 			sb.append(SPACE);
 		}

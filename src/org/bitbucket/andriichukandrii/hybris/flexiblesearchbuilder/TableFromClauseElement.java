@@ -7,12 +7,7 @@ public class TableFromClauseElement extends AbstractTableFromClauseElement
 {
 	TableFromClauseElement(final Class<? extends ItemModel> clazz)
 	{
-		super(null, clazz);
-	}
-
-	TableFromClauseElement(final String typeCode)
-	{
-		super(null, typeCode);
+		super(FlexibleSearchQueryStartChainElement.INSTANCE, clazz);
 	}
 
 	/**

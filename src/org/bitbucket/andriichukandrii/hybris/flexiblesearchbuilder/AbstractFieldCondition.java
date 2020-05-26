@@ -13,7 +13,7 @@ public abstract class AbstractFieldCondition extends AbstractCondition
 
 	protected AbstractFieldCondition(final Field field)
 	{
-		super(null);
+		super(FlexibleSearchQueryStartChainElement.INSTANCE);
 		this.field = field;
 	}
 
@@ -28,7 +28,7 @@ public abstract class AbstractFieldCondition extends AbstractCondition
 	{
 		super.appendQuery(sb);
 
-		if (parent != null)
+		if (!FlexibleSearchQueryStartChainElement.INSTANCE.equals(parent))
 		{
 			sb.append(SPACE);
 		}

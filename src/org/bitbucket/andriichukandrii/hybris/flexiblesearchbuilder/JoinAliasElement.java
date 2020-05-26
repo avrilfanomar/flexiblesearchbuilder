@@ -5,7 +5,7 @@ import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.Flexib
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.RegularParameterConditionType.IS_EQUAL_TO;
 
 
-public class JoinAliasElement extends AbstractFlexibleSearchQueryChainElement
+public class JoinAliasElement extends FlexibleSearchQueryInnerChainElement
 {
 	private final Alias alias;
 
