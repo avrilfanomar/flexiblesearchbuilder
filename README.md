@@ -78,9 +78,9 @@ final Alias v = new Alias("v");
 final FlexibleSearchQuery query3 =
     select(p)
     .from(
-    table(ProductModel.class).as(p)
-    join(VariantProductModel.class).as(v)
-        .on(p.pk(), IS_EQUAL_TO, v.field(VariantProductModel.BASEPRODUCT))
+        table(ProductModel.class).as(p)
+        join(VariantProductModel.class).as(v)
+            .on(p.pk(), IS_EQUAL_TO, v.field(VariantProductModel.BASEPRODUCT))
     )
     .where(
         condition(v.field(VariantProductModel.OFFLINEDATE), IS_GREATER_THAN, timeService.getCurrentTime())
