@@ -10,15 +10,19 @@ import de.hybris.platform.core.model.ItemModel;
  */
 public abstract class AbstractJoinElement extends AbstractTableFromClauseElement
 {
+	private final String joinStatement;
 
-	AbstractJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
+	AbstractJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz,
+			final String joinStatement)
 	{
 		super(parent, clazz);
+		this.joinStatement = joinStatement;
 	}
 
-	AbstractJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final String typeCode)
+	AbstractJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final String typeCode, final String joinStatement)
 	{
 		super(parent, typeCode);
+		this.joinStatement = joinStatement;
 	}
 
 	/**
@@ -38,8 +42,6 @@ public abstract class AbstractJoinElement extends AbstractTableFromClauseElement
 	{
 		super.appendQuery(sb);
 
-		sb.append(SPACE).append(getJoinStatement()).append(SPACE).append(getTypecode());
+		sb.append(SPACE).append(joinStatement).append(SPACE).append(getTypecode());
 	}
-
-	protected abstract String getJoinStatement();
 }

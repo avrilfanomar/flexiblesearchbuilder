@@ -12,7 +12,8 @@ public interface OrderByAcceptable
 {
 	default OrderByClause orderByAsc(final String firstField, final String... restFields)
 	{
-		final List<FieldRepresentation> fields = toList(firstField, restFields).stream().map(SimpleField::new).collect(Collectors.toList());
+		final List<FieldRepresentation> fields = toList(firstField, restFields).stream().map(SimpleField::new)
+				.collect(Collectors.toList());
 		return new OrderByClause((AbstractFlexibleSearchQueryChainElement) this, fields, ASC);
 	}
 
@@ -24,7 +25,8 @@ public interface OrderByAcceptable
 
 	default OrderByClause orderByDesc(final String firstField, final String... restFields)
 	{
-		final List<FieldRepresentation> fields = toList(firstField, restFields).stream().map(SimpleField::new).collect(Collectors.toList());
+		final List<FieldRepresentation> fields = toList(firstField, restFields).stream().map(SimpleField::new)
+				.collect(Collectors.toList());
 		return new OrderByClause((AbstractFlexibleSearchQueryChainElement) this, fields, DESC);
 	}
 

@@ -3,6 +3,7 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.CLOSING_BRACE;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.OPENING_BRACE;
 
+
 public class SqlFunction implements FieldRepresentation
 {
 	private final SqlFunctionType functionType;
@@ -23,6 +24,6 @@ public class SqlFunction implements FieldRepresentation
 	@Override
 	public String toString()
 	{
-		return functionType.getName() + OPENING_BRACE + field.toString() + CLOSING_BRACE;
+		return functionType.getName() + OPENING_BRACE + field + CLOSING_BRACE;
 	}
 }

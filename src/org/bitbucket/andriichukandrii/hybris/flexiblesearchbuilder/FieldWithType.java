@@ -3,7 +3,7 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 /**
  * Maps field to it's type.
  */
-public class FieldWithType extends ValueWithType
+public final class FieldWithType extends ValueWithType
 {
 	private final Field field;
 

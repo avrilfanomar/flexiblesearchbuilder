@@ -12,7 +12,7 @@ public class ModelSelectClause extends AbstractSelectClause
 		field = new SimpleField(ItemModel.PK);
 	}
 
-	ModelSelectClause(final AliasedField aliasedField)
+	ModelSelectClause(final Field aliasedField)
 	{
 		this.field = aliasedField;
 	}

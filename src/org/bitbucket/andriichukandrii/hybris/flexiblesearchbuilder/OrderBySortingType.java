@@ -12,7 +12,8 @@ public enum OrderBySortingType
 		this.operator = operator;
 	}
 
-	public String getOperator() {
+	public String getOperator()
+	{
 		return operator;
 	}
 }

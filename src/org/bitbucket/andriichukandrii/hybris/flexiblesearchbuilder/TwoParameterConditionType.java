@@ -1,5 +1,6 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+@SuppressWarnings("SameParameterValue")
 public enum TwoParameterConditionType implements ConditionType
 {
 	BETWEEN("BETWEEN", "AND"), NOT_BETWEEN("NOT BETWEEN", "AND");

@@ -3,6 +3,7 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.CLOSING_BRACKET;
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.OPENING_BRACKET;
 
+
 class SimpleField implements Field, FieldRepresentation
 {
 	private final String fieldName;

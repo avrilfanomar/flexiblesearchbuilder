@@ -4,7 +4,7 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 /**
  * Maps function on a field to result type.
  */
-public class FunctionWithType extends ValueWithType
+public final class FunctionWithType extends ValueWithType
 {
 	private final SqlFunction function;
 

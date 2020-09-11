@@ -6,8 +6,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class VarargCollectionUtils
+public final class VarargCollectionUtils
 {
+	private VarargCollectionUtils()
+	{
+	}
+
 	@SafeVarargs
 	public static <T> List<T> toList(final T first, T... rest)
 	{
@@ -18,9 +22,5 @@ public class VarargCollectionUtils
 	public static <T> Stream<T> toStream(final T first, final T... rest)
 	{
 		return Stream.concat(Stream.of(first), Arrays.stream(rest));
-	}
-
-	private VarargCollectionUtils()
-	{
 	}
 }

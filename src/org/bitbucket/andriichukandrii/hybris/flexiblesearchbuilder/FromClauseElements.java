@@ -3,8 +3,12 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 import de.hybris.platform.core.model.ItemModel;
 
 
-public class FromClauseElements
+public final class FromClauseElements
 {
+	private FromClauseElements()
+	{
+	}
+
 	/**
 	 * Creates table element by given model type.
 	 * 
@@ -27,9 +31,5 @@ public class FromClauseElements
 	public static TableFromClauseElement table(final String typeCode)
 	{
 		return new TableFromClauseElement(typeCode);
-	}
-
-	private FromClauseElements()
-	{
 	}
 }

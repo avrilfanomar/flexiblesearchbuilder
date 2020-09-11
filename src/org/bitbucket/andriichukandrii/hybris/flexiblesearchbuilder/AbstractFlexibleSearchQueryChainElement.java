@@ -4,6 +4,7 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 
 import java.util.Map;
 
+
 /**
  * An abstract element of the flexible search query.
  */

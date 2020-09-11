@@ -17,7 +17,7 @@ public class FieldToFieldCondition extends AbstractFieldCondition
 	}
 
 	FieldToFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final Field field,
-						  final RegularParameterConditionType conditionType, final Field secondField)
+			final RegularParameterConditionType conditionType, final Field secondField)
 	{
 		super(parent, field);
 		this.conditionType = conditionType;
@@ -29,7 +29,7 @@ public class FieldToFieldCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(conditionType.getOperator()).append(secondField.toString());
+		sb.append(conditionType.getOperator()).append(secondField);
 	}
 
 }

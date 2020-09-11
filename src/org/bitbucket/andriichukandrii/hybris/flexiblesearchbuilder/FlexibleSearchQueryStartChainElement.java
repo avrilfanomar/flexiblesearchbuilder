@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * First chain element of the query. Helps to enable a no-null policy.
  */
-public class FlexibleSearchQueryStartChainElement extends AbstractFlexibleSearchQueryChainElement
+public final class FlexibleSearchQueryStartChainElement extends AbstractFlexibleSearchQueryChainElement
 {
 	public static final FlexibleSearchQueryStartChainElement INSTANCE = new FlexibleSearchQueryStartChainElement();
 

@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Inner chain element, which always has a parent.
  */
-public class FlexibleSearchQueryInnerChainElement extends AbstractFlexibleSearchQueryChainElement
+public abstract class FlexibleSearchQueryInnerChainElement extends AbstractFlexibleSearchQueryChainElement
 {
 	protected final AbstractFlexibleSearchQueryChainElement parent;
 

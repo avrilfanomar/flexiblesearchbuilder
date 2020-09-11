@@ -3,11 +3,15 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 import java.util.Collection;
 
 
-public class Conditions
+public final class Conditions
 {
+	private Conditions()
+	{
+	}
+
 	/**
 	 * Creates field condition with a given parameter.
-	 * 
+	 *
 	 * @param fieldName
 	 *           field name (from model item, e.g. ProductModel.NAME)
 	 * @param conditionType
@@ -29,17 +33,16 @@ public class Conditions
 	 *           field name (from model item, e.g. ProductModel.NAME)
 	 * @param conditionType
 	 *           type of condition
-	 * @param firstConditionParameter
+	 * @param firstParameter
 	 *           first parameter
-	 * @param secondConditionParameter
+	 * @param secondParameter
 	 *           second parameter
 	 * @return new field condition
 	 */
 	public static AbstractFieldCondition condition(final String fieldName, final TwoParameterConditionType conditionType,
-			final Object firstConditionParameter, final Object secondConditionParameter)
+			final Object firstParameter, final Object secondParameter)
 	{
-		return new TwoParameterFieldCondition(new SimpleField(fieldName), conditionType, firstConditionParameter,
-				secondConditionParameter);
+		return new TwoParameterFieldCondition(new SimpleField(fieldName), conditionType, firstParameter, secondParameter);
 	}
 
 	/**
@@ -78,7 +81,7 @@ public class Conditions
 
 	/**
 	 * Creates field condition with a given parameter.
-	 * 
+	 *
 	 * @param aliasedField
 	 *           field with alias
 	 * @param conditionType
@@ -100,21 +103,21 @@ public class Conditions
 	 *           field with alias
 	 * @param conditionType
 	 *           type of condition
-	 * @param firstConditionParameter
+	 * @param firstParameter
 	 *           first parameter
-	 * @param secondConditionParameter
+	 * @param secondParameter
 	 *           second parameter
 	 * @return new field condition
 	 */
 	public static AbstractFieldCondition condition(final AliasedField aliasedField, final TwoParameterConditionType conditionType,
-			final Object firstConditionParameter, final Object secondConditionParameter)
+			final Object firstParameter, final Object secondParameter)
 	{
-		return new TwoParameterFieldCondition(aliasedField, conditionType, firstConditionParameter, secondConditionParameter);
+		return new TwoParameterFieldCondition(aliasedField, conditionType, firstParameter, secondParameter);
 	}
 
 	/**
 	 * Creates field condition with a given collection parameter.
-	 * 
+	 *
 	 * @param aliasedField
 	 *           field with alias
 	 * @param conditionType
@@ -148,7 +151,7 @@ public class Conditions
 
 	/**
 	 * Creates field condition with a given condition.
-	 * 
+	 *
 	 * @param fieldName
 	 *           field name (from model item, e.g. ProductModel.NAME)
 	 * @param conditionType
@@ -162,7 +165,7 @@ public class Conditions
 
 	/**
 	 * Creates field condition with a given condition.
-	 * 
+	 *
 	 * @param aliasedField
 	 *           field with alias
 	 * @param conditionType
@@ -176,7 +179,7 @@ public class Conditions
 
 	/**
 	 * Puts given condition (with chained conditions if any) into braces.
-	 * 
+	 *
 	 * @param condition
 	 *           condition to wrap
 	 * @return braced condition chain
@@ -188,7 +191,7 @@ public class Conditions
 
 	/**
 	 * Builds inner query condition.
-	 * 
+	 *
 	 * @param queryConditionType
 	 *           condition type
 	 * @param innerQuery
@@ -203,7 +206,7 @@ public class Conditions
 
 	/**
 	 * Creates custom condition of given string. Given string is trimmed to remove redundant spaces if any.
-	 * 
+	 *
 	 * @param customCondition
 	 *           custom condition string, e.g. "UPPER({name})=?name"
 	 * @return new custom condition element
@@ -211,9 +214,5 @@ public class Conditions
 	public static AbstractCondition customCondition(final String customCondition)
 	{
 		return new CustomCondition(customCondition.trim());
-	}
-
-	private Conditions()
-	{
 	}
 }

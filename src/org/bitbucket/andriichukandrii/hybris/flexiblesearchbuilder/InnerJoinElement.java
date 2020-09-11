@@ -13,17 +13,11 @@ public class InnerJoinElement extends AbstractJoinElement
 
 	InnerJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
 	{
-		super(parent, clazz);
+		super(parent, clazz, JOIN);
 	}
 
 	InnerJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final String typeCode)
 	{
-		super(parent, typeCode);
-	}
-
-	@Override
-	protected String getJoinStatement()
-	{
-		return JOIN;
+		super(parent, typeCode, JOIN);
 	}
 }

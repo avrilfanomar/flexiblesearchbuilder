@@ -32,6 +32,6 @@ public abstract class AbstractFieldCondition extends AbstractCondition
 		{
 			sb.append(SPACE);
 		}
-		sb.append(field.toString());
+		sb.append(field);
 	}
 }

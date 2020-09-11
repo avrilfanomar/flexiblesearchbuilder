@@ -14,28 +14,25 @@ import java.util.Map;
 public class TwoParameterFieldCondition extends AbstractFieldCondition
 {
 	private final TwoParameterConditionType conditionType;
-	private final Object firstConditionParameter;
-	private final Object secondConditionParameter;
-	private String firstParameterCode;
-	private String secondParameterCode;
+	private final CodeToValue firstParam;
+	private final CodeToValue secondParam;
 
-	TwoParameterFieldCondition(final Field field, final TwoParameterConditionType conditionType,
-			final Object firstConditionParameter, final Object secondConditionParameter)
+	TwoParameterFieldCondition(final Field field, final TwoParameterConditionType conditionType, final Object firstParamValue,
+			final Object secondParamValue)
 	{
 		super(field);
 		this.conditionType = conditionType;
-		this.firstConditionParameter = firstConditionParameter;
-		this.secondConditionParameter = secondConditionParameter;
+		this.firstParam = new CodeToValue(firstParamValue);
+		this.secondParam = new CodeToValue(secondParamValue);
 	}
 
 	TwoParameterFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final Field field,
-			final TwoParameterConditionType conditionType, final Object firstConditionParameter,
-			final Object secondConditionParameter)
+			final TwoParameterConditionType conditionType, final Object firstParam, final Object secondParam)
 	{
 		super(parent, field);
 		this.conditionType = conditionType;
-		this.firstConditionParameter = firstConditionParameter;
-		this.secondConditionParameter = secondConditionParameter;
+		this.firstParam = new CodeToValue(firstParam);
+		this.secondParam = new CodeToValue(secondParam);
 	}
 
 	@Override
@@ -43,9 +40,9 @@ public class TwoParameterFieldCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(SPACE).append(conditionType.getOperator()).append(SPACE).append(QUESTION_MARK).append(firstParameterCode)
+		sb.append(SPACE).append(conditionType.getOperator()).append(SPACE).append(QUESTION_MARK).append(firstParam.getCode())
 				.append(SPACE).append(conditionType.getParameterJoinOperation()).append(SPACE).append(QUESTION_MARK)
-				.append(secondParameterCode);
+				.append(secondParam.getCode());
 	}
 
 	@Override
@@ -53,9 +50,36 @@ public class TwoParameterFieldCondition extends AbstractFieldCondition
 	{
 		super.addParameters(parameterMap);
 
-		firstParameterCode = createUniqueParameterCode(parameterMap, field.getFieldName());
-		parameterMap.put(firstParameterCode, firstConditionParameter);
-		secondParameterCode = createUniqueParameterCode(parameterMap, field.getFieldName());
-		parameterMap.put(secondParameterCode, secondConditionParameter);
+		firstParam.setCode(createUniqueParameterCode(parameterMap, field.getFieldName()));
+		parameterMap.put(firstParam.getCode(), firstParam.getValue());
+
+		secondParam.setCode(createUniqueParameterCode(parameterMap, field.getFieldName()));
+		parameterMap.put(secondParam.getCode(), secondParam.getValue());
+	}
+
+	private static final class CodeToValue
+	{
+		private String code;
+		private final Object value;
+
+		CodeToValue(final Object value)
+		{
+			this.value = value;
+		}
+
+		public String getCode()
+		{
+			return code;
+		}
+
+		public void setCode(String code)
+		{
+			this.code = code;
+		}
+
+		public Object getValue()
+		{
+			return value;
+		}
 	}
 }

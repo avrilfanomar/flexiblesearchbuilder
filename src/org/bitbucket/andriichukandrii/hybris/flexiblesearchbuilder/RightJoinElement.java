@@ -13,17 +13,11 @@ public class RightJoinElement extends AbstractJoinElement
 
 	RightJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
 	{
-		super(parent, clazz);
+		super(parent, clazz, RIGHT_JOIN);
 	}
 
 	RightJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final String typeCode)
 	{
-		super(parent, typeCode);
-	}
-
-	@Override
-	protected String getJoinStatement()
-	{
-		return RIGHT_JOIN;
+		super(parent, typeCode, RIGHT_JOIN);
 	}
 }

@@ -10,8 +10,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class FlexibleSearchQueryBuilder
+public final class FlexibleSearchQueryBuilder
 {
+	private FlexibleSearchQueryBuilder()
+	{
+	}
 
 	/**
 	 * Builds select statement from given model type.
@@ -38,14 +41,13 @@ public class FlexibleSearchQueryBuilder
 	{
 		final List<String> selectParameters = toStream(firstValueWithType, restFieldsWithTypes).map(ValueWithType::getValue)
 				.collect(Collectors.toList());
-		final List<Class<?>> types = toStream(firstValueWithType, restFieldsWithTypes).map(ValueWithType::getType).collect(
-				Collectors.toList());
+		final List<Class<?>> types = toStream(firstValueWithType, restFieldsWithTypes).map(ValueWithType::getType)
+				.collect(Collectors.toList());
 		return new SelectClause(selectParameters, types);
 	}
 
 	/**
-	 * Builds select clause with given custom fields statement. Puts given result types (if any) into flexible search
-	 * query.
+	 * Builds select clause with given custom fields statement. Puts given result types (if any) into flexible search query.
 	 *
 	 * @param customFieldsStatement
 	 *           custom statement to put into select clause, e.g. "COUNT({pk})"
@@ -68,9 +70,5 @@ public class FlexibleSearchQueryBuilder
 	public static ModelSelectClause select(final Alias alias)
 	{
 		return new ModelSelectClause(alias.pk());
-	}
-
-	private FlexibleSearchQueryBuilder()
-	{
 	}
 }

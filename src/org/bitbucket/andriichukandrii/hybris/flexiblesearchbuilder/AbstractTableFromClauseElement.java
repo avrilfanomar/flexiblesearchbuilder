@@ -29,7 +29,7 @@ public abstract class AbstractTableFromClauseElement extends AbstractFromClauseE
 		return typeCode;
 	}
 
-	private String fetchTypeCode(final Class<? extends ItemModel> clazz)
+	private static String fetchTypeCode(final Class<? extends ItemModel> clazz)
 	{
 		try
 		{
@@ -37,8 +37,8 @@ public abstract class AbstractTableFromClauseElement extends AbstractFromClauseE
 		}
 		catch (final IllegalAccessException | NoSuchFieldException e)
 		{
-			throw new IllegalStateException("Failed to get _TYPECODE field from class " + clazz.getName()
-					+ " during building flexible search query.", e);
+			throw new IllegalStateException(
+					"Failed to get _TYPECODE field from class " + clazz.getName() + " during building flexible search query.", e);
 		}
 	}
 }

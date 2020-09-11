@@ -1,9 +1,11 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
+@FunctionalInterface
 public interface Field
 {
 	/**
 	 * Returns this field's name
+	 * 
 	 * @return field name
 	 */
 	String getFieldName();

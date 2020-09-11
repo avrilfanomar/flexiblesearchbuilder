@@ -10,6 +10,11 @@ public class TableFromClauseElement extends AbstractTableFromClauseElement
 		super(FlexibleSearchQueryStartChainElement.INSTANCE, clazz);
 	}
 
+	TableFromClauseElement(final String typeCode)
+	{
+		super(FlexibleSearchQueryStartChainElement.INSTANCE, typeCode);
+	}
+
 	/**
 	 * Marks the table with given alias.
 	 *

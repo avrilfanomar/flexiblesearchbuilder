@@ -17,7 +17,6 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 {
 	private final ParameterConditionType conditionType;
 	private final Object conditionParameter;
-	private final boolean collectionParameter;
 	private String parameterCode;
 
 	ParameterFieldCondition(final Field field, final ParameterConditionType conditionType, final Object conditionParameter)
@@ -25,7 +24,6 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 		super(field);
 		this.conditionType = conditionType;
 		this.conditionParameter = conditionParameter;
-		this.collectionParameter = conditionParameter instanceof Collection;
 	}
 
 	ParameterFieldCondition(final AbstractFlexibleSearchQueryChainElement parent, final Field field,
@@ -34,7 +32,6 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 		super(parent, field);
 		this.conditionType = conditionType;
 		this.conditionParameter = conditionParameter;
-		this.collectionParameter = conditionParameter instanceof Collection;
 	}
 
 	@Override
@@ -42,8 +39,18 @@ public class ParameterFieldCondition extends AbstractFieldCondition
 	{
 		super.appendQuery(sb);
 
-		sb.append(conditionType.getOperator()).append(collectionParameter ? OPENING_BRACE : "").append(QUESTION_MARK)
-				.append(parameterCode).append(collectionParameter ? CLOSING_BRACE : "");
+		final boolean collectionParameter = conditionParameter instanceof Collection;
+
+		sb.append(conditionType.getOperator());
+		if (collectionParameter)
+		{
+			sb.append(OPENING_BRACE);
+		}
+		sb.append(QUESTION_MARK).append(parameterCode);
+		if (collectionParameter)
+		{
+			sb.append(CLOSING_BRACE);
+		}
 	}
 
 	@Override

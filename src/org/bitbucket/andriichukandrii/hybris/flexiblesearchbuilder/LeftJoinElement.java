@@ -13,17 +13,11 @@ public class LeftJoinElement extends AbstractJoinElement
 
 	LeftJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final Class<? extends ItemModel> clazz)
 	{
-		super(parent, clazz);
+		super(parent, clazz, LEFT_JOIN);
 	}
 
 	LeftJoinElement(final AbstractFlexibleSearchQueryChainElement parent, final String typeCode)
 	{
-		super(parent, typeCode);
-	}
-
-	@Override
-	protected String getJoinStatement()
-	{
-		return LEFT_JOIN;
+		super(parent, typeCode, LEFT_JOIN);
 	}
 }

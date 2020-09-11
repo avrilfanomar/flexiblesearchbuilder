@@ -1,7 +1,11 @@
 package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
-public class SqlFunctions
+public final class SqlFunctions
 {
+	private SqlFunctions()
+	{
+	}
+
 	/**
 	 * Creates SQL SUM() functions with given field.
 	 * 
@@ -120,9 +124,5 @@ public class SqlFunctions
 	public static SqlFunction max(final AliasedField field)
 	{
 		return new SqlFunction(SqlFunctionType.MAX, field);
-	}
-
-	private SqlFunctions()
-	{
 	}
 }

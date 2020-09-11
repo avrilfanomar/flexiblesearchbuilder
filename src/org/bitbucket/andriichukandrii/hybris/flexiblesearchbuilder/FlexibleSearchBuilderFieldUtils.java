@@ -2,23 +2,23 @@ package org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder;
 
 import static org.bitbucket.andriichukandrii.hybris.flexiblesearchbuilder.FlexibleSearchQueryConstants.FIELD_SEPARATOR;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 
-class FlexibleSearchBuilderFieldUtils
+final class FlexibleSearchBuilderFieldUtils
 {
 	private FlexibleSearchBuilderFieldUtils()
 	{
 	}
 
-	static String buildFieldsQueryString(final List<?> fields)
+	static String buildFieldsQueryString(final Collection<?> fields)
 	{
 		return fields.stream().map(Object::toString).collect(Collectors.joining(FIELD_SEPARATOR));
 	}
 
-	static String buildQueryString(final List<String> parts)
+	static String buildQueryString(final Iterable<String> parts)
 	{
 		return String.join(FIELD_SEPARATOR, parts);
 	}

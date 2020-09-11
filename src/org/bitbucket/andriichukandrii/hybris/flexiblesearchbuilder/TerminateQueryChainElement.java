@@ -17,16 +17,16 @@ public abstract class TerminateQueryChainElement extends FlexibleSearchQueryInne
 	}
 
 	/**
-	 * Builds the flexible search query with all chained elements inside current element. Puts all parameters (if any)
-	 * into query as well.
+	 * Builds the flexible search query with all chained elements inside current element. Puts all parameters (if any) into
+	 * query as well.
 	 * 
 	 * @return flexible search query
 	 */
 	public FlexibleSearchQuery build()
 	{
 		final Map<String, Object> parameters = buildParameters();
-		final StringBuilder sb = buildQuery();
-		final FlexibleSearchQuery fQuery = new FlexibleSearchQuery(sb.toString(), parameters);
+		final String query = buildQuery();
+		final FlexibleSearchQuery fQuery = new FlexibleSearchQuery(query, parameters);
 
 		configureQuery(fQuery);
 
@@ -40,10 +40,10 @@ public abstract class TerminateQueryChainElement extends FlexibleSearchQueryInne
 		return parameterMap;
 	}
 
-	private StringBuilder buildQuery()
+	private String buildQuery()
 	{
 		final StringBuilder sb = new StringBuilder();
 		appendQuery(sb);//applies all clauses internally
-		return sb;
+		return sb.toString();
 	}
 }

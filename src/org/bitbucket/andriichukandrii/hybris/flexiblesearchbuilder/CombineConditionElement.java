@@ -42,17 +42,16 @@ public class CombineConditionElement extends FlexibleSearchQueryInnerChainElemen
 	 *           field name (from model item, e.g. ProductModel.NAME)
 	 * @param conditionType
 	 *           type of condition
-	 * @param firstConditionParameter
+	 * @param firstParameter
 	 *           first parameter
-	 * @param secondConditionParameter
+	 * @param secondParameter
 	 *           second parameter
 	 * @return new field condition
 	 */
 	public AbstractFieldCondition condition(final String fieldName, final TwoParameterConditionType conditionType,
-											final Object firstConditionParameter, final Object secondConditionParameter)
+			final Object firstParameter, final Object secondParameter)
 	{
-		return new TwoParameterFieldCondition(this, new SimpleField(fieldName), conditionType, firstConditionParameter,
-				secondConditionParameter);
+		return new TwoParameterFieldCondition(this, new SimpleField(fieldName), conditionType, firstParameter, secondParameter);
 	}
 
 	/**
@@ -113,16 +112,16 @@ public class CombineConditionElement extends FlexibleSearchQueryInnerChainElemen
 	 *           field with alias
 	 * @param conditionType
 	 *           type of condition
-	 * @param firstConditionParameter
+	 * @param firstParameter
 	 *           first parameter
-	 * @param secondConditionParameter
+	 * @param secondParameter
 	 *           second parameter
 	 * @return new field condition
 	 */
 	public AbstractFieldCondition condition(final AliasedField aliasedField, final TwoParameterConditionType conditionType,
-											final Object firstConditionParameter, final Object secondConditionParameter)
+			final Object firstParameter, final Object secondParameter)
 	{
-		return new TwoParameterFieldCondition(this, aliasedField, conditionType, firstConditionParameter, secondConditionParameter);
+		return new TwoParameterFieldCondition(this, aliasedField, conditionType, firstParameter, secondParameter);
 	}
 
 	/**
@@ -259,7 +258,7 @@ public class CombineConditionElement extends FlexibleSearchQueryInnerChainElemen
 	{
 		super.appendQuery(sb);
 
-		sb.append(SPACE).append(combineOperator.getValue());
+		sb.append(SPACE).append(combineOperator);
 	}
 
 }

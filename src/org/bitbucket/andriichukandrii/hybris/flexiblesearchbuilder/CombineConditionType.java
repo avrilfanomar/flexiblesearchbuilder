@@ -11,7 +11,8 @@ public enum CombineConditionType
 		this.operator = operator;
 	}
 
-	public String getValue()
+	@Override
+	public String toString()
 	{
 		return operator;
 	}
