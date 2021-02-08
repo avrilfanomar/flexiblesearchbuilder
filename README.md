@@ -7,19 +7,13 @@ The aim of this extension is to `write().flexibleSearchQueries().easily()` with 
 
 It is released as a Java library.
 You can find jars at https://bitbucket.org/andriichukandrii/flexiblesearchbuilder/downloads/
-It is now also possible to use following Maven dependency from jcenter:
+It is now also possible to use following Maven dependency:
 ```xml
-<repository>
-    <id>jcenter</id>
-    <name>jcenter</name>
-    <url>https://jcenter.bintray.com</url>
-</repository>
-...
 <dependency>
     <groupId>org.bitbucket.andriichukandrii</groupId>
     <artifactId>flexiblesearchbuilder</artifactId>
     <version>3.2.0</version>
-</dependency> 
+</dependency>
 ```
 
 For development purposes it can be added as an extension either to localextensions.xml or to other extension dependencies.
