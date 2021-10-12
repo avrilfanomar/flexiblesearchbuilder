@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class OrderByClause extends TerminateQueryChainElement
+public class OrderByClause extends TerminateQueryChainElement implements OrderByAcceptable
 {
 	private final List<FieldRepresentation> fields;
 	private final OrderBySortingType sortingType;
 
 	OrderByClause(final AbstractFlexibleSearchQueryChainElement parent, final List<FieldRepresentation> fields,
-			final OrderBySortingType sortingType)
+				  final OrderBySortingType sortingType)
 	{
 		super(parent);
 		this.fields = fields;
@@ -26,7 +26,14 @@ public class OrderByClause extends TerminateQueryChainElement
 	{
 		super.appendQuery(sb);
 
-		sb.append(SPACE).append(ORDER_BY).append(SPACE).append(joinFields()).append(SPACE).append(sortingType.getOperator());
+		if ((parent instanceof OrderByClause))
+		{
+			sb.append(FIELD_SEPARATOR);
+		} else
+		{
+			sb.append(SPACE).append(ORDER_BY).append(SPACE);
+		}
+		sb.append(joinFields()).append(SPACE).append(sortingType.getOperator());
 	}
 
 	private String joinFields()

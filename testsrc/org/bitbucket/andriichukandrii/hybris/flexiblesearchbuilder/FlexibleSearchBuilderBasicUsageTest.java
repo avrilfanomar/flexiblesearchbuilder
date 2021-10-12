@@ -285,8 +285,9 @@ public class FlexibleSearchBuilderBasicUsageTest
 		final FlexibleSearchQuery fQuery =
 				selectFrom(ProductModel.class)
 				.orderByAsc(ProductModel.CODE, ProductModel.CATALOGVERSION)
+				.orderByDesc(ProductModel.NAME)
 				.build();
-		assertEquals("Query does not match", "SELECT {pk} FROM {Product} ORDER BY {code} ASC,{catalogVersion} ASC", fQuery.getQuery());
+		assertEquals("Query does not match", "SELECT {pk} FROM {Product} ORDER BY {code} ASC,{catalogVersion} ASC,{name} DESC", fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 0, fQuery.getQueryParameters().size());
 	}
 
