@@ -12,7 +12,7 @@ It is now also possible to use following Maven dependency:
 <dependency>
     <groupId>org.bitbucket.andriichukandrii</groupId>
     <artifactId>flexiblesearchbuilder</artifactId>
-    <version>3.2.0</version>
+    <version>3.2.2</version>
 </dependency>
 ```
 
