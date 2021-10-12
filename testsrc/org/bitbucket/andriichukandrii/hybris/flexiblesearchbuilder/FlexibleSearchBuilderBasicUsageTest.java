@@ -37,6 +37,7 @@ import org.springframework.util.CollectionUtils;
 
 //This test relies on the constants and current implementation. However, it serves as a point of safety and a reference now.
 @UnitTest
+@SuppressWarnings({"LawOfDemeter"})
 public class FlexibleSearchBuilderBasicUsageTest
 {
 
@@ -285,7 +286,7 @@ public class FlexibleSearchBuilderBasicUsageTest
 				selectFrom(ProductModel.class)
 				.orderByAsc(ProductModel.CODE, ProductModel.CATALOGVERSION)
 				.build();
-		assertEquals("Query does not match", "SELECT {pk} FROM {Product} ORDER BY {code},{catalogVersion} ASC", fQuery.getQuery());
+		assertEquals("Query does not match", "SELECT {pk} FROM {Product} ORDER BY {code} ASC,{catalogVersion} ASC", fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 0, fQuery.getQueryParameters().size());
 	}
 
@@ -356,7 +357,7 @@ public class FlexibleSearchBuilderBasicUsageTest
 
 		assertEquals("Query does not match", "SELECT {o.pk} FROM {Order AS o LEFT JOIN OrderEntry AS e ON " +
 				"{o.pk}={e.order} JOIN Product AS p ON {p.pk}={e.product}} WHERE {p.code}=?code1 AND {o.totalPrice}>?totalPrice1" +
-				" GROUP BY {o.pk},{o.code},{e.entryNumber} ORDER BY {o.code},{e.entryNumber} DESC",
+				" GROUP BY {o.pk},{o.code},{e.entryNumber} ORDER BY {o.code} DESC,{e.entryNumber} DESC",
 				fQuery.getQuery());
 		assertEquals("Wrong number of query parameters", 2, fQuery.getQueryParameters().size());
 		assertEquals("Query parameter doesn't match", productCode, fQuery.getQueryParameters().get("code1"));
