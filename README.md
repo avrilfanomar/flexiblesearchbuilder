@@ -167,7 +167,7 @@ final FlexibleSearchQuery query6 =
 ```
 
 ## Contributing
-Pull requests are welcome. If you're planning to contribute, drop me a [mail](mailto:andrey000mar@gmail.com) as currently the process is not formal yet.
+Pull requests are welcome. If you're planning to contribute, drop me a [mail](mailto:92jo5eqfy@mozmail.com) as currently the process is not formal yet.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
