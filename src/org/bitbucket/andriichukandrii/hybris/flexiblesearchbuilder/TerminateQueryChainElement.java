@@ -17,6 +17,32 @@ public abstract class TerminateQueryChainElement extends FlexibleSearchQueryInne
 	}
 
 	/**
+	 * Begins a UNION operation by combining this query with the provided query.
+	 * This query will be the first part of the UNION.
+	 *
+	 * @param queryToAdd The query to combine with this one using a UNION operation. Must not be null.
+	 * @return A new {@link UnionQueryChainElement} representing the combined queries, allowing for further chaining or building.
+	 * @throws IllegalArgumentException if queryToAdd is null (handled by UnionQueryChainElement constructor).
+	 */
+	public UnionQueryChainElement union(final TerminateQueryChainElement queryToAdd)
+	{
+		return new UnionQueryChainElement(this, queryToAdd, UnionType.UNION);
+	}
+
+	/**
+	 * Begins a UNION ALL operation by combining this query with the provided query.
+	 * This query will be the first part of the UNION ALL.
+	 *
+	 * @param queryToAdd The query to combine with this one using a UNION ALL operation. Must not be null.
+	 * @return A new {@link UnionQueryChainElement} representing the combined queries, allowing for further chaining or building.
+	 * @throws IllegalArgumentException if queryToAdd is null (handled by UnionQueryChainElement constructor).
+	 */
+	public UnionQueryChainElement unionAll(final TerminateQueryChainElement queryToAdd)
+	{
+		return new UnionQueryChainElement(this, queryToAdd, UnionType.UNION_ALL);
+	}
+
+	/**
 	 * Builds the flexible search query with all chained elements inside current element. Puts all parameters (if any) into
 	 * query as well.
 	 * 
