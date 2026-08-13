@@ -1,3 +1,5 @@
+
+
 # Flexible search query builder
 
 Flexible search query builder is SAP Hybris Commerce extension (released as a library) that provides developer-friendly way to build flexible search queries.
@@ -87,7 +89,7 @@ final FlexibleSearchQuery query3 =
     select(p)
     .from(
         table(ProductModel.class).as(p)
-        join(VariantProductModel.class).as(v)
+        .join(VariantProductModel.class).as(v)
             .on(p.pk(), IS_EQUAL_TO, v.field(VariantProductModel.BASEPRODUCT))
     )
     .where(
